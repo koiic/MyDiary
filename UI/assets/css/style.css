@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Maven+Pro|Roboto|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
 body {
     padding: 0px;
     margin: 0px;
     height: 100%;
-    font-size: 1rem;
-    font-family: 'Maven Pro', sans-serif;
+    font-size: 0.8rem;
+    font-family: 'Comfortaa', sans-serif;
     box-sizing: border-box;
     overflow-x: hidden;
 }
