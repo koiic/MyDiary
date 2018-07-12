@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Lobster+Two');
-@import url('https://fonts.googleapis.com/css?family=Handlee');
+@import url('https://fonts.googleapis.com/css?family=Maven+Pro|Roboto|Ubuntu');
 body {
     padding: 0px;
     margin: 0px;
     height: 100%;
     font-size: 1rem;
-    font-family: 'Handlee', sans-serif;
+    font-family: 'Maven Pro', sans-serif;
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
-body::-webkit-scrollbar {
+
+/* body::-webkit-scrollbar {
     width: 0.4em;
 }
 
@@ -21,7 +21,7 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background-color: #0541fb;
     outline: 1px solid blue;
-}
+} */
 
 h1,
 h2,
@@ -262,6 +262,19 @@ a {
 
 .account__btn>a:hover,
 .account__btn>a:focus {
+    color: #fff;
+}
+
+.account__btn2 {
+    background: #fcce3f;
+    color: #fff;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.account__btn2:hover,
+.account__btn2:focus {
+    background-color: #f7202a;
     color: #fff;
 }
 
@@ -618,9 +631,8 @@ a {
     background: #fff;
     color: #222;
     padding: .375rem .75rem;
-    ;
-    border-top: 4px solid #cded5a;
-    border-top-right-radius: 5px;
+    /* border-top: 4px solid #cded5a;
+    border-top-right-radius: 5px; */
     /* box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4); */
 }
 
@@ -895,4 +907,33 @@ p-0 {
     background-color: #fff;
     padding: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+
+/* Notification button  */
+
+.output {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+legend {
+    background-color: #000;
+    color: #fff;
+    padding: 3px 6px;
+}
+
+.control {
+    margin: 1rem 0;
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+    font-size: .8rem;
+    width: 20%;
+}
+
+.hours {
+    font-size: .7em;
+    color: #999;
 }
