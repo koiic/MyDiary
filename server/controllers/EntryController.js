@@ -8,11 +8,8 @@ class EntryController {
       title, note, isFavourite
     } = request.body;
 
-    console.log(`new request is :${request.body}`);
-
     // check if title exists
     const error = DummyDataHelpers.validateEntry(request.body);
-    console.log(error);
     if (!error) {
      if(DummyDataHelpers.titleExists(dummyEntries, request.body.title)){
        return response.status(409).json({
@@ -56,6 +53,32 @@ class EntryController {
       status: 'Failed',
       message: 'No entries found'
     })
+    
+  }
+
+  static getEntryById(request, response){
+
+    const { entryId } = request.params;
+    const id = parseInt(entryId);
+    if(typeof id !== 'number' || isNaN(id)){
+      return response.status(400).json({
+        status:'Failed',
+        message:'Id must be a number'
+      })
+    }
+    const fetchedEntry = DummyDataHelpers.findById(dummyEntries, id);
+    if(!fetchedEntry|| fetchedEntry == null){
+      return response.status(404).json({
+        status: 'Failed',
+        message: `no entry for id ${entryId}`
+      })
+    }
+    return response.status(200).json({
+      status: 'success',
+      message: 'fetch entry succesfully',
+      data : fetchedEntry
+    })
+
     
   }
 }

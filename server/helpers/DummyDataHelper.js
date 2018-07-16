@@ -22,13 +22,13 @@ class DummyDataHelpers {
     return false;
   }
 
-  static findById(dummyEntries, id) {
-    for (let i = 0; i < dummyEntries.lenth; i + 1) {
-      if (dummyEntries[i].id === id) {
-        return true;
+  static findById(dummydata, id) {
+    for (let i = 0; i < dummydata.length; i++) {
+      if (parseInt(dummydata[i].id) == id) {
+        return dummydata[i];
       }
     }
-    return false;
+    return null;
   }
 }
 
