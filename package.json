@@ -1,0 +1,47 @@
+{
+  "name": "mydiary",
+  "version": "1.0.0",
+  "description": "An Online Journal for keeping personal info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node --presets babel-preset-env ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koiic/MyDiary.git"
+  },
+  "keywords": [
+    "Online",
+    "journal",
+    "diary"
+  ],
+  "author": "Ismail Ibrahim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/koiic/MyDiary/issues"
+  },
+  "homepage": "https://github.com/koiic/MyDiary#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dot-env": "0.0.1",
+    "express": "^4.16.3",
+    "pg": "^7.4.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nodemon": "^1.18.2"
+  }
+}
