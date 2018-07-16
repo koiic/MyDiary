@@ -1,6 +1,3 @@
-module.exports = {
-    "extends": "airbnb-base",
-    "env" : {
-        "mocha" : true
-    }
+module.exports {
+    "extends": "airbnb-base"
 };
