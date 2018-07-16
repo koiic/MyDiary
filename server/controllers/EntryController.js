@@ -14,17 +14,13 @@ class EntryController {
     const error = DummyDataHelpers.validateEntry(request.body);
     console.log(error);
     if (!error) {
-      // const result = DummyDataHelpers.findByTitle(dummyEntries, request.body.title)
-      // console.log(`result is : ${result}`);
-      // if(result > 0){
-      //   return response.status(409).json({
-      //     status: 'failed',
-      //     message: 'entry title exist',
-      //   });
-      // }
-
+     if(DummyDataHelpers.titleExists(dummyEntries, request.body.title)){
+       return response.status(409).json({
+        status: 'failed',
+        message: 'entry title exist',
+      });
+     }
       const entryid = dummyEntries.length - 1 + 1;
-
       const newEntry = {
         id: entryid,
         title: request.body.title,
@@ -49,10 +45,16 @@ class EntryController {
   }
 
   static getAllEntries(request,response){
-    return response.status(200).json({
-      status: 'success',
-      message: 'fetch all entries succesfully',
-      data : dummyEntries
+    if(!dummyEntries || dummyEntries !== undefined){
+      return response.status(200).json({
+        status: 'success',
+        message: 'fetch all entries succesfully',
+        data : dummyEntries
+      })
+    }
+    return response.status(404).json({
+      status: 'Failed',
+      message: 'No entries found'
     })
     
   }

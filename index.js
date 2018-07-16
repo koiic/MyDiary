@@ -6,7 +6,7 @@ import entryRoute from './server/routes/entryRoute';
 
 const app = express();
 
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 5000;
 // Log Requests
 app.use(logger);
 

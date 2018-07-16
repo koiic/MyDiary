@@ -47,7 +47,7 @@ const dummyEntries = [
   },
 
   {
-    id: 4,
+    id: 5,
     title: 'The Accident',
     imageLink: 'accidentscene.jpg',
     note: 'It was sad to be a witness of a ghastly accident that cost lives of people',
@@ -58,7 +58,7 @@ const dummyEntries = [
   },
 
   {
-    id: 5,
+    id: 6,
     title: 'My Mentor',
     imageLink: 'bestman.jpg',
     note: 'No mentor like mine ever...he is readily available',
@@ -69,7 +69,7 @@ const dummyEntries = [
   },
 
   {
-    id: 6,
+    id: 7,
     title: 'The Attack',
     imageLink: '',
     note: 'The experience was unpleasant that i dont want to remeber how it happens',
@@ -80,7 +80,7 @@ const dummyEntries = [
   },
 
   {
-    id: 7,
+    id: 8,
     title: 'Graduation',
     imageLink: 'graduation.jpg',
     note: 'The unforgettable obvious smile on my face',

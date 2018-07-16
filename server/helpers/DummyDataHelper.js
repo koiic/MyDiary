@@ -11,16 +11,15 @@ class DummyDataHelpers {
     return error;
   }
 
-  static findByTitle(dummydata, title) {
-    let result;
-    dummydata.forEach(item => {
-      console.log(item.title);
-      if(item.title === title){
-        result = 1
+  static titleExists(dummydata, title) {
+
+    for(let i = 1; i < dummydata.length; i++){
+      if(dummydata[i].title.trim().toLowerCase() === title.trim().toLowerCase()){
+        return true;
       }
-      result = -1
-    });
-    return result;
+    }
+
+    return false;
   }
 
   static findById(dummyEntries, id) {
