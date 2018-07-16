@@ -1,19 +1,29 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import logger from 'volleyball';
+import entryRoute from './server/routes/entryRoute';
 
 
-// instantiate a new express object
 const app = express();
-const port = 5000;
 
-// body parser to parse request in urlencoded and jsonformat
+const port = process.env.PORT || 5000;
+// Log Requests
+app.use(logger);
+
+// Stream request body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// base path for routes
-app.get('/', (request, response) => response.send('just created my server'));
 
-app.listen(port, () => console.log(`server started at port ${port}`));
+// Base Routes
+app.get('/', (request, response) => response.status(200).json({
+  status: 'success',
+  message: 'Welcome To MyDiary... Write Your Intentions And Emotions!',
+}));
+// app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/entries', entryRoute);
 
-
+app.listen(port, () => {
+  console.log(`server listening on port ${port}`);
+});
 export default app;
