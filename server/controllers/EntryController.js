@@ -1,46 +1,25 @@
 import DummyDataHelpers from '../helpers/DummyDataHelper';
 import dummyEntries from '../DummyData/dummyEntries';
+import EntryService from '../services/EntryService';
 
 class EntryController {
+
+  //create new entry
   static addNewEntry(request, response) {
 
     const {
       title, note, isFavourite
     } = request.body;
-
-    // check if title exists
-    const error = DummyDataHelpers.validateEntry(request.body);
-    if (!error) {
-     if(DummyDataHelpers.titleExists(dummyEntries, request.body.title)){
-       return response.status(409).json({
-        status: 'failed',
-        message: 'entry title exist',
-      });
-     }
-      const entryid = dummyEntries.length - 1 + 1;
-      const newEntry = {
-        id: entryid,
-        title: request.body.title,
-        note: request.body.note,
-        imageUrl: request.body.imageUrl,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        isFavourite: request.body.isFavourite,
-      };
-
-      dummyEntries.push(newEntry);
-      return response.status(201).json({
-        status: 'successful',
-        message: 'entry creation successful',
-        data: newEntry,
-      });
-    }
-    return response.status(400).json({
-      status: 'failed',
-      message: error,
-    });
+    const result = EntryService.addEntry(request.body);
+      return response.status(result.status).json({
+        message: result.responseMessage,
+        data: result.responseData,
+      });  
+   
   }
 
+
+  //fetch all created entries
   static getAllEntries(request,response){
     if(!dummyEntries || dummyEntries !== undefined){
       return response.status(200).json({
@@ -56,9 +35,58 @@ class EntryController {
     
   }
 
+  // get volume of all saved entries
+  static getAllEntryCount(request, response){
+    const result = EntryService.entryVolume(dummyEntries);
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
+  }
+
+  //fetch current day entry
+  static getTodayEntries(request, response){
+    const result = EntryService.todaysEntry();
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
+
+  }
+
+  //get volume of current day entry
+  static getTodayEntryCount(request, response){
+    const result = EntryService.todaysEntryVolume();
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
+  }
+
+  //Fetch single entry by its id
   static getEntryById(request, response){
 
     const { entryId } = request.params;
+    
+    const result = EntryService.findById(entryId);
+    if(!result|| result == null){
+      return response.status(404).json({
+        status: 'Failed',
+        message: `no entry for id ${entryId}`
+      })
+    }
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
+  }
+
+  
+
+  // modify an entry and update an entry
+  static updateEntries(request, response){
+
+    const {entryId} = request.params;
     const id = parseInt(entryId);
     if(typeof id !== 'number' || isNaN(id)){
       return response.status(400).json({
@@ -66,21 +94,65 @@ class EntryController {
         message:'Id must be a number'
       })
     }
-    const fetchedEntry = DummyDataHelpers.findById(dummyEntries, id);
-    if(!fetchedEntry|| fetchedEntry == null){
-      return response.status(404).json({
-        status: 'Failed',
-        message: `no entry for id ${entryId}`
+    const result = EntryService.update(request.body, id);
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
+
+  }
+
+  //delete one entry by its id
+  static deleteEntry(request, response){
+    const {entryId} = request.params;
+    const id = parseInt(entryId);
+    if(typeof id !== 'number' || isNaN(id)){
+      return response.status(400).json({
+        status:'Failed',
+        message:'Id must be a number'
       })
     }
-    return response.status(200).json({
-      status: 'success',
-      message: 'fetch entry succesfully',
-      data : fetchedEntry
-    })
-
-    
+    const result = EntryService.deleteOne(id);
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
   }
+
+  // fetch all favourite entry
+  static getFavouriteEntry(request, response){
+    const result = EntryService.favouriteEntries();
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
+
+  }
+
+   // get volume of favourite entry
+   static getFavouriteEntryCount(request, response){
+    const result = EntryService.favouriteEntriesCount();
+    return response.status(result.status).json({
+      message:result.responseMessage,
+      data: result.responseData
+    });
+
+  }
+
+  // static getDailyEntries(request, response){
+  //   const { createdDate } = request.params;
+  //   console.log(createdDate);
+
+  //   const result = EntryService.dailyEntry(createdDate);
+  //   return response.status(result.status).json({
+  //     message:result.responseMessage,
+  //     data: result.responseData
+  //   });
+  // }
+
+  
+
+
 }
 
 export default EntryController;
