@@ -20,7 +20,7 @@ const dummyEntries = [
     note: "Certain food that i just don't love eating",
     createdDate: dateCreated,
     updatedDate: dateCreated,
-    isFavourite: true,
+    isFavourite: false,
 
   },
 
@@ -42,7 +42,7 @@ const dummyEntries = [
     note: 'I had a Awesome experiene at dubai',
     createdDate: dateCreated,
     updatedDate: dateCreated,
-    isFavourite: true,
+    isFavourite: false,
 
   },
 
@@ -75,7 +75,7 @@ const dummyEntries = [
     note: 'The experience was unpleasant that i dont want to remeber how it happens',
     createdDate: dateCreated,
     updatedDate: dateCreated,
-    isFavourite: false,
+    isFavourite: true,
 
   },
 

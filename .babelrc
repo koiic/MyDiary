@@ -1,12 +1,6 @@
-{
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "current"
-      },
-      "test": {
-        "plugins": ["istanbul"]
-      }
-    }]
-  ]
-}
+
+  {
+    "presets": ["env"]
+  }
+
+ 
