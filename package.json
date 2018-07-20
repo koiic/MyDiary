@@ -4,7 +4,7 @@
   "description": "An online diary for keeping records,event and information",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node --presets babel-preset-env ./index.js",
+    "start": "nodemon --exec babel-node --presets babel-preset-env ./index.js",
     "test": "cross-env NODE_ENV=test nyc mocha --require babel-register --timeout 60000 ./test/*.js --exit || true"
   },
   "repository": {
