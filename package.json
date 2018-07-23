@@ -9,7 +9,6 @@
     "test": "cross-env NODE_ENV=test nyc mocha --require babel-register --timeout 60000 ./test/*.js --exit || true",
     "cover": "istanbul cover _mocha -- --require babel-register test",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
-   
   },
   "repository": {
     "type": "git",
