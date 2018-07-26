@@ -4,7 +4,7 @@ import config from '../config/config';
 const db = (process.env.NODE_ENV === 'test') ? new pg.Pool(config.test) : new pg.Pool(config.database);
 
 
-const createUserTable = `
+const createTableUsers = `
 CREATE TABLE IF NOT EXISTS  users(
     id SERIAL PRIMARY KEY, 
     email VARCHAR(255) UNIQUE NOT NULL, 
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS  users(
     lastname VARCHAR(255)
 )`;
 
-const createAuthTable = `
+const createTableAuth = `
 CREATE TABLE IF NOT EXISTS auth(
     id SERIAL PRIMARY KEY, 
     username VARCHAR(255) UNIQUE NOT NULL, 
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS auth(
     CONSTRAINT FK_UserAuth FOREIGN KEY (userId) REFERENCES users(id)
 )`;
 
-const createEntryTable = `
+const createTableEntry = `
 CREATE TABLE IF NOT EXISTS entries(
     id SERIAL PRIMARY KEY, 
     title VARCHAR(255)  NOT NULL, 
@@ -34,19 +34,19 @@ CREATE TABLE IF NOT EXISTS entries(
    
 )`;
 
-db.query(createUserTable).then((res) => {
+db.query(createTableUsers).then((res) => {
   if (res) {
     console.log('User table created  successfullyy');
   } else {
     console.log('Error creating User table');
   }
-  db.query(createAuthTable).then((res) => {
+  db.query(createTableAuth).then((res) => {
     if (res) {
       console.log('Auth table created successfullyy');
     } else {
       console.log('Error creating Auth table');
     }
-    db.query(createEntryTable).then((res) => {
+    db.query(createTableEntry).then((res) => {
       if (res) {
         console.log('Entry table created successfullyy');
       } else {
