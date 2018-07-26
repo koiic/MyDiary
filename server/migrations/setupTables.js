@@ -9,16 +9,20 @@ CREATE TABLE IF NOT EXISTS  users(
     id SERIAL PRIMARY KEY, 
     email VARCHAR(255) UNIQUE NOT NULL, 
     firstname VARCHAR(255), 
-    lastname VARCHAR(255)
+    lastname VARCHAR(255),
+    created_at TIMESTAMP Default Now(),
+    updated_at TIMESTAMP Default Now()
 )`;
 
 const createTableAuth = `
 CREATE TABLE IF NOT EXISTS auth(
     id SERIAL PRIMARY KEY, 
     username VARCHAR(255) UNIQUE NOT NULL, 
-    password VARCHAR(255) NOT NULL, 
-    userId int, 
-    CONSTRAINT FK_UserAuth FOREIGN KEY (userId) REFERENCES users(id)
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP Default Now(),
+    updated_at TIMESTAMP Default Now(), 
+    user_id int, 
+    CONSTRAINT FK_UserAuth FOREIGN KEY (user_id) REFERENCES users(id)
 )`;
 
 const createTableEntry = `
@@ -27,10 +31,11 @@ CREATE TABLE IF NOT EXISTS entries(
     title VARCHAR(255)  NOT NULL, 
     note VARCHAR(255) NOT NULL, 
     is_favourite BOOLEAN,
+    image_url VARCHAR(255),
     created_at TIMESTAMP Default Now(),
     updated_at TIMESTAMP Default Now(),
-    userId int, 
-    CONSTRAINT FK_UserEntries FOREIGN KEY (userId) REFERENCES users(id)
+    user_id int, 
+    CONSTRAINT FK_UserEntries FOREIGN KEY (user_id) REFERENCES users(id)
    
 )`;
 
@@ -52,7 +57,8 @@ db.query(createTableUsers).then((res) => {
       } else {
         console.log('Error creating entry table');
       }
-      db.end();
     });
   });
 });
+
+export default db;

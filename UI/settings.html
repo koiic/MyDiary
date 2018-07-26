@@ -17,8 +17,8 @@
             <div class="navbar fixed-top">
                 <div class="shelter">
                     <div class="navbar__nav nav__logo nav__underline">
-                        <a href="index.html">
-                            <span class="highlight">My</span>-Diary</a>
+                        <i class="fa fa-book"></i><span class="highlight">My</span>-Diarry
+
                     </div>
                     <div class="navbar__nav navbar__nav-toggle">
                         <i class="fa fa-bars"></i>
@@ -51,12 +51,7 @@
                             </div>
                         </div>
                     </nav>
-                    <nav class="nav__items nav__items-right">
-
-                        <a href="create.html"><button type="button" class="btn account__btn">
-                                        Create Entry <i class="fa fa-plus"></i>
-                                    </button></a>
-                    </nav>
+                    
                 </div>
                 <!--end container-->
             </div>
@@ -68,12 +63,26 @@
                     <div class="row">
 
                         <div class="column"></div>
-                        <div class="column">
-                            <div class="card">
+                        <div class="column pt-5">
+                                <div class="form-card"> 
 
-                                <h5> Account Settings</h5>
+                                <h5> Profile </h5>
 
-                                <p>Set daily notifications </p>
+                                <div class="form-row">
+                                        <label for="name">Firstname:</label>
+                                        <input type="text" class="form-control" placeholder="Ismail" required minlength="3" maxlength="30">
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="name">Lastname:</label>
+                                        <input type="text" class="form-control" placeholder="Ibrahim" required minlength="3" maxlength="30">
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="name"></label>Email:</label>
+                                        <input type="email" class="form-control" placeholder="fish@gmail.com" required minlength="3" maxlength="30">
+                                    </div>
+
+
+                                <p>notification </p>
                                 <form>
                                     <div class="form-row">
                                         <input class="tgl tgl-flat" id="cb4" type="checkbox" /> Enable Notifications

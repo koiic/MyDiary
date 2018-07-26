@@ -5,13 +5,13 @@ const db = (process.env.NODE_ENV === 'test') ? new pg.Pool(config.test) : new pg
 
 
 const dropUser = `
-  DROP TABLE users`;
+DROP TABLE IF EXISTS users`;
 
 const dropAuth = `
-  DROP TABLE auth`;
+DROP TABLE IF EXISTS auth`;
 
 const dropEntry = `
-  DROP TABLE entries`;
+DROP TABLE IF EXISTS entries`;
 
 
 db.query(dropAuth).then((res) => {

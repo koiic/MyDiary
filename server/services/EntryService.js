@@ -97,7 +97,6 @@ class EntryService {
       }
       // const entryid = (dummyEntries.length - 1) + 1;
       const entryid = dummyEntries[dummyEntries.length - 1].id + 1;
-      console.log(entryid);
       const newEntry = {
         id: entryid,
         title: data.title,
@@ -115,10 +114,7 @@ class EntryService {
 
   // Method for finding an entry by Id
   static fetchById(id) {
-    console.log(id);
-    const result = DummyDataHelpers.findById(dummyEntries, id);
-    
-    console.log(`my result : ${result}`);
+    const result = DummyDataHelpers.findById(dummyEntries, id); 
     if (!result) {
       return this.badRequest(`no entry for id ${id}`);
     }
@@ -138,7 +134,6 @@ class EntryService {
     }
 
     const entry = DummyDataHelpers.updateEntry(data, dummyEntries, id);
-    console.log(entry);
     if (entry) {
       return this.success(`An entry with ${id} has been updated successfully`, entry);
     }
