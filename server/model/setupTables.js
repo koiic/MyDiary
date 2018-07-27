@@ -52,7 +52,8 @@ db.query(createTableUsers).then((res) => {
       } else {
         console.log('Error creating entry table');
       }
-      db.end();
     });
   });
 });
+
+export default db;
