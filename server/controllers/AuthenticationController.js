@@ -26,8 +26,8 @@ class AuthenticationController {
         }
         // query db to check if username exists
         db.query(find('id', 'auth', 'username', request.body.username))
-          .then((result) => {
-            if (result.rowCount > 0) {
+          .then((newresult) => {
+            if (newresult.rowCount > 0) {
               return response.status(409).json({ message: 'Username already exists' });
             }
             const hashedPassword = bcrypt.hashSync(request.body.password.trim(), 10);
@@ -75,7 +75,7 @@ class AuthenticationController {
             config.jwtSecret, { expiresIn: 86400 });
           return response.status(200).json({
             message: 'User login successfully',
-            email: result.rows[0].email,
+            username: result.rows[0].username,
             token,
           });
         }
