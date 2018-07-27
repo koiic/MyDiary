@@ -33,10 +33,9 @@ class DummyDataHelpers {
 
 
   static findById(dummyData, id) {
-    for (let i = 0; i < dummyData.length; i += 1) {
-      if (dummyData[i].id === id) {
-        return dummyData[i];
-      }
+    const index = dummyData.findIndex(obj => obj.id === id);
+    if (index > -1) {
+      return dummyData[index];
     }
     return null;
   }
@@ -95,7 +94,6 @@ class DummyDataHelpers {
   static findEntryByDate(dummyData, creationDate) {
     const dateCreated = creationDate.toDateString;
     const todayEntry = [];
-
     for (let i = 0; i < dummyData.length; i += 1) {
       if (dummyData[i].createdDate.toDateString === dateCreated) {
         todayEntry.push(dummyData[i]);

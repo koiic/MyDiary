@@ -6,7 +6,9 @@ import {
 } from '../model/queryHelper';
 import db from '../model/setupTables';
 import config from '../config/config';
-
+/**
+ * Authentication class
+ */
 class AuthenticationController {
   /**
      * @name createUserAccount
@@ -26,12 +28,14 @@ class AuthenticationController {
         }
         // query db to check if username exists
         db.query(find('id', 'auth', 'username', request.body.username))
-          .then((result) => {
-            if (result.rowCount > 0) {
-              return response.status(409).json({ message: 'Username already exists' });
+          .then((fetchAuthResult) => {
+            if (fetchAuthResult.rowCount > 0) {
+              return response.status(409).json({ message: 'User already exists' });
             }
             const hashedPassword = bcrypt.hashSync(request.body.password.trim(), 10);
-            db.query(createNewUser(request.body.email, request.body.firstname, request.body.lastname))
+            db.query(createNewUser(request.body.email,
+              request.body.firstname,
+              request.body.lastname))
               .then((queryResult) => {
                 if (queryResult.rowCount === 0) {
                   return queryResult.status(500).json({ message: 'Unable to create user' });

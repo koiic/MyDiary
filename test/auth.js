@@ -151,6 +151,25 @@ describe('Authentication', () => {
           done();
         });
     });
+
+    it('should not signup if username exist', (done) => {
+      const signup = {
+        email: `${email}@gmail.com`,
+        firstname: 'fish',
+        lastname: 'octopus',
+        username: 'bsn4cbj9av',
+        password: 'secret',
+      };
+      chai.request(app)
+        .post('/api/v1/auth/signup')
+        .send(signup)
+        .end((err, response) => {
+          response.should.have.status(409);
+          response.body.should.be.a('object');
+          response.body.should.have.a.property('message').to.equal('User already exists');
+          done();
+        });
+    });
   });
 
   describe('login', () => {

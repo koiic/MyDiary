@@ -16,7 +16,11 @@ class EntryController {
   }
 
 
-  // fetch all created entries
+  /**
+   * get all entries
+   * @param {} request
+   * @param {*} response
+   */
   static getAllEntries(request, response) {
     if (!dummyEntries || dummyEntries !== undefined) {
       return response.status(200).json({
@@ -31,7 +35,11 @@ class EntryController {
     });
   }
 
-  // get volume of all saved entries
+  /**
+   * get all entry count
+   * @param {} request
+   * @param {*} response
+   */
   static getAllEntryCount(request, response) {
     const result = EntryService.entryVolume(dummyEntries);
     return response.status(result.status).json({
