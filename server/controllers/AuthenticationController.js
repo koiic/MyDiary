@@ -57,14 +57,10 @@ class AuthenticationController {
   }
 
   static login(request, response) {
-    // const error = AuthHelper.verifyRequest(request.body);
-    // if (error) {
-    //   return response.status(400).json({ message: error });
-    // }
     db.query(find('*', 'auth', 'username', request.body.username))
       .then((result) => {
         if (result.rowCount === 0) {
-          return response.status(404).json({ message: 'Invalid username or password' });
+          return response.status(400).json({ message: 'Invalid username or password' });
         }
         // Check if password is valid/Matched
         const validatePassword = bcrypt.compareSync(request.body.password.trim(),

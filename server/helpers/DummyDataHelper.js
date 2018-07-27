@@ -14,10 +14,10 @@ class DummyDataHelpers {
   static validateId(entryId) {
     // let error;
     const id = parseInt(entryId, 10);
-    console.log(id);
     if (isNaN(id) || typeof id !== 'number') {
       return false;
     }
+
     return true;
   }
 
@@ -34,7 +34,6 @@ class DummyDataHelpers {
 
   static findById(dummyData, id) {
     for (let i = 0; i < dummyData.length; i += 1) {
-      console.log(dummyData[i]);
       if (dummyData[i].id === id) {
         return dummyData[i];
       }
@@ -44,7 +43,6 @@ class DummyDataHelpers {
 
   static updateEntry(data, dummyData, id) {
     const fetchData = this.findById(dummyData, id);
-    console.log(`the data : ${fetchData}`);
     if (fetchData) {
       fetchData.title = data.title;
       fetchData.note = data.note;
@@ -58,7 +56,6 @@ class DummyDataHelpers {
 
   static deleteEntry(dummyData, id) {
     const fetchData = this.findById(dummyData, id);
-    console.log(fetchData);
     if (fetchData) {
       dummyData.splice(dummyData.indexOf(fetchData), 1);
       return true;

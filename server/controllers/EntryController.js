@@ -9,7 +9,6 @@ class EntryController {
       title, note, isFavourite,
     } = request.body;
     const result = EntryService.addEntry(request.body);
-    // console.log(response);
     return response.status(result.status).json({
       message: result.responseMessage,
       data: result.responseData,
