@@ -64,7 +64,7 @@ a {
     padding: 10px;
     background-color: #fff;
     border-radius: 5px;
-   
+
     /* box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15); */
     /* box-shadow: 0 0 1px rgba(34, 25, 25, 0.4); */
     box-shadow: 0 0.5px 0 0 #ffffff inset, 0 1px 2px 0 #B3B3B3;
@@ -364,6 +364,7 @@ a {
     background-color: #45bd80;
     padding: 10px;
     color: #fff;
+    height: 60px;
     box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
     z-index: 1070;
 }
@@ -561,7 +562,7 @@ a {
 }
 
 .signup {
-    background: #fff;
+    /* background: #fff; */
     /* background: url('../images/art.png'); */
     background-size: cover;
     background-position: center;
@@ -596,13 +597,13 @@ a {
 }
 
 .form-card {
-    width: 100%;
+    width: 150%;
     background: #fff;
     color: #222;
     padding: .375rem .75rem;
-    /* border-top: 4px solid #cded5a;
-    border-top-right-radius: 5px; */
-    /* box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4); */
+    border-top: 4px solid #cded5a;
+    border-top-right-radius: 5px; 
+    /* box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);  */
 }
 
 .form-control {
@@ -906,3 +907,36 @@ label {
     font-size: .7em;
     color: #999;
 }
+
+/*modal*/
+.modal{
+    display: none;
+    position: fixed;
+    left:0;
+    top:0;
+    height:100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+  }
+  .modal-content{
+   background-color: #fafafa;
+   margin: 10% auto;
+   padding: 20px;
+   width: 30%;
+   box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),
+   0 7px 20px 0 rgba(0,0,0,0.17);
+   animation-name: modalopen;
+   animation-duration: 1s;
+  }
+  .closeBtn{
+    color:#ccc;
+    float:right;
+    font-size: 30px;
+  }
+  .closeBtn:hover, .closeBtn:focus{
+    color:#000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

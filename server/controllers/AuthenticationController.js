@@ -31,7 +31,7 @@ class AuthenticationController {
               return response.status(409).json({ message: 'Username already exists' });
             }
             const hashedPassword = bcrypt.hashSync(request.body.password.trim(), 10);
-            db.query(createNewUser(request.body.email, request.body.firstname, request.body.email))
+            db.query(createNewUser(request.body.email, request.body.firstname, request.body.lastname))
               .then((queryResult) => {
                 if (queryResult.rowCount === 0) {
                   return queryResult.status(500).json({ message: 'Unable to create user' });

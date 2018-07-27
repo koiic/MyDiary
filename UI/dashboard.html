@@ -17,8 +17,8 @@
             <div class="navbar fixed-top">
                 <div class="shelter">
                     <div class="navbar__nav nav__logo nav__underline">
-                        <a href="index.html">
-                            <span class="highlight">My</span>-Diary</a>
+                        
+                        <i class="fa fa-book"></i><span class="highlight">My</span>-Diarry
                     </div>
                     <div class="navbar__nav navbar__nav-toggle">
                         <i class="fa fa-bars"></i>
@@ -53,9 +53,9 @@
                     </nav>
                     <nav class="nav__items nav__items-right">
 
-                        <a href="create.html"><button type="button" class="btn account__btn">
+                        <button type="button" class="btn account__btn" id="modalBtn">
                                         Create Entry <i class="fa fa-plus"></i>
-                                    </button></a>
+                        </button></a>
                     </nav>
                 </div>
                 <!--end container-->
@@ -269,8 +269,37 @@
                 <!--end navbar-->
             </div>
         </section>
+        <section>
+            <div id="simpleModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="closeBtn">&times;</span>
+                        <h2>Create Entry</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-row">
+                            <label for="name">Title</label>
+                            <input type="text" class="form-control" placeholder="Enrty title">
+                            </div>
+                            <div class="form-row">
+                                <label for="name">Note</label>
+                                <input type="text" class="form-control" placeholder="Description">
+                            </div>
+                            <div class="form-row">
+                                <label for="name">Date:</label>
+                                <input type="date" class="form-control" placeholder="Date">
+                            </div>
+                        </form>
+                    </div><!--end modal body-->
+                    <div class="modal-footer">
+                    <button class="btn account__btn"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <script src="./assets/js/toggle.js"></script>
+    <script src="./assets/js/app.js"></script>
 </body>
 
 </html>
