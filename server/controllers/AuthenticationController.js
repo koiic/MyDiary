@@ -1,67 +1,67 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import AuthHelper from '../helpers/AuthHelper';
 import {
-  find, createNewUser, createAuth,
+  checkUser, findOne, createNewUser, createAuth,
 } from '../model/queryHelper';
-import db from '../model/setupTables';
+import db from '../model/connect';
 import config from '../config/config';
 /**
  * Authentication class
  */
-class AuthenticationController {
+class AuthenticationController  {
   /**
      * @name createUserAccount
      * @description create a new user
      *
      */
   static createAccount(request, response) {
-    const error = AuthHelper.verifyRequest(request.body);
-    if (error) {
-      return response.status(400).json({ message: error });
-    }
     // query db to check if user exist
-    db.query(find('email', 'users', 'email', request.body.email))
+    console.log(request.body);
+    db.query(checkUser(request.body))
       .then((result) => {
+        console.log(result);
         if (result.rowCount > 0) {
-          return response.status(409).json({ message: 'User already exists' });
+          console.log('FISHHHHH');
+          return response.status(409).json({
+            message: 'User Already exists',
+          });
         }
-        // query db to check if username exists
-        db.query(find('id', 'auth', 'username', request.body.username))
-          .then((fetchAuthResult) => {
-            if (fetchAuthResult.rowCount > 0) {
-              return response.status(409).json({ message: 'User already exists' });
-            }
-            const hashedPassword = bcrypt.hashSync(request.body.password.trim(), 10);
+        bcrypt.hash(request.body.password.trim(), 10)
+          .then((hashedPassword) => {
             db.query(createNewUser(request.body.email,
               request.body.firstname,
               request.body.lastname))
               .then((queryResult) => {
                 if (queryResult.rowCount === 0) {
-                  return queryResult.status(500).json({ message: 'Unable to create user' });
+                  return response.status(500).json({
+                    message: 'Internal Server Error',
+                  });
                 }
-                db.query(createAuth(request.body.username, hashedPassword, queryResult.rows[0].id))
+                db.query(createAuth(
+                  request.body.username,
+                  hashedPassword,
+                  queryResult.rows[0].id))
                   .then((authResult) => {
                     if (authResult.rowCount === 0) {
-                      return authResult.status(500).json({ message: 'Unable to create auth' });
+                      return response.status(500).json({
+                        message: 'Internal Server Error',
+                      });
                     }
                     // Generate token after creating user to automtically log in
                     const token = jwt.sign({ id: queryResult.rows[0].id },
                       config.jwtSecret, { expiresIn: 86400 });
                     return response.status(201).json({
-                      message: 'User Creation successful',
-                      email: queryResult.rows[0].email,
-                      token,
+                      message: 'User Creation Successfully',
+                      data: token,
                     });
                   });
               });
           });
       });
-    return null;
   }
 
   static login(request, response) {
-    db.query(find('*', 'auth', 'username', request.body.username))
+    db.query(findOne('*', 'auth', 'username', request.body.username))
       .then((result) => {
         if (result.rowCount === 0) {
           return response.status(400).json({ message: 'Invalid username or password' });

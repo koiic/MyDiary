@@ -22,6 +22,14 @@ app.get('/', (request, response) => response.status(200).json({
 app.use('/api/v1/auth', authenticationRoute);
 app.use('/api/v1/entries', entryRoute);
 
+// app.use((err, request, response, next) => {
+//   response.locals.error = err;
+//   const status = err.status || 500;
+//   response.status(status >= 100 && status < 600 ? err.code : 500);
+//   next(err);
+// });
+
+
 app.listen(port, () => {
   console.log(`server listening on port ${port}`);
 });

@@ -22,7 +22,7 @@ describe('Authentication', () => {
         .send(signup)
         .end((err, response) => {
           response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Invalid email');
+          response.body.should.have.a.property('message').to.equal('Please fill all fields');
           done();
         });
     });
@@ -40,7 +40,7 @@ describe('Authentication', () => {
         .send(signup)
         .end((err, response) => {
           response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Password length cannot be lesser than 4');
+          response.body.should.have.a.property('message').to.equal('Please fill all fields');
           done();
         });
     });
@@ -57,7 +57,7 @@ describe('Authentication', () => {
         .send(signup)
         .end((err, response) => {
           response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Email can not be blank');
+          response.body.should.have.a.property('message').to.equal('Please define all fields');
           done();
         });
     });
@@ -75,7 +75,7 @@ describe('Authentication', () => {
         .send(signup)
         .end((err, response) => {
           response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Invalid password');
+          response.body.should.have.a.property('message').to.equal('Please define all fields');
           done();
         });
     });
@@ -98,7 +98,7 @@ describe('Authentication', () => {
         });
     });
 
-    it('should not signup if email  exist', (done) => {
+    it('should not signup if email exist', (done) => {
       const signup = {
         email: 'calory@gmail.com',
         firstname: 'fish',
@@ -111,25 +111,7 @@ describe('Authentication', () => {
         .send(signup)
         .end((err, response) => {
           response.should.have.status(409);
-          response.body.should.have.a.property('message').to.equal('User already exists');
-          done();
-        });
-    });
-
-    it('should not signup if password length is less than 4', (done) => {
-      const signup = {
-        email: 'drunk@gmail.com',
-        firstname: 'fish',
-        lastname: 'octopus',
-        username: 'bob',
-        password: 'sec',
-      };
-      chai.request(app)
-        .post('/api/v1/auth/signup')
-        .send(signup)
-        .end((err, response) => {
-          response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Password length cannot be lesser than 4');
+          response.body.should.have.a.property('message').to.equal('User Already exists');
           done();
         });
     });
@@ -166,7 +148,7 @@ describe('Authentication', () => {
         .end((err, response) => {
           response.should.have.status(409);
           response.body.should.be.a('object');
-          response.body.should.have.a.property('message').to.equal('User already exists');
+          response.body.should.have.a.property('message').to.equal('User Already exists');
           done();
         });
     });
@@ -184,7 +166,7 @@ describe('Authentication', () => {
         .end((err, response) => {
           console.log(response);
           response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Invalid username or password');
+          response.body.should.have.a.property('message').to.equal('Please fill all fields');
           done();
         });
     });
@@ -229,7 +211,7 @@ describe('Authentication', () => {
         .send(login)
         .end((err, response) => {
           response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Invalid username or password');
+          response.body.should.have.a.property('message').to.equal('Please fill all fields');
           done();
         });
     });

@@ -37,8 +37,8 @@ class EntryController {
 
   /**
    * get all entry count
-   * @param {} request
-   * @param {*} response
+   * @param  request
+   * @param  response
    */
   static getAllEntryCount(request, response) {
     const result = EntryService.entryVolume(dummyEntries);
@@ -48,7 +48,11 @@ class EntryController {
     });
   }
 
-  // fetch current day entry
+  /**
+   * get current day entry
+   * 
+   * @param  response
+   */
   static getTodayEntries(request, response) {
     const result = EntryService.todaysEntry();
     return response.status(result.status).json({
@@ -57,7 +61,11 @@ class EntryController {
     });
   }
 
-  // get volume of current day entry
+  /**
+   * get current day entry count
+   * @param  request
+   * @param  response
+   */
   static getTodayEntryCount(request, response) {
     const result = EntryService.todaysEntryVolume();
     return response.status(result.status).json({
@@ -66,7 +74,11 @@ class EntryController {
     });
   }
 
-  // Fetch single entry by its id
+  /**
+   * get entry by id
+   * @param  id
+   * @param  response
+   */
   static getEntryById(request, response) {
     const { entryId } = request.params;
     const id = parseInt(entryId, 10);
@@ -90,7 +102,11 @@ class EntryController {
   }
 
 
-  // modify an entry and update an entry
+  /**
+   * Update Entry
+   * @param  request
+   * @param  response
+   */
   static updateEntries(request, response) {
     const { entryId } = request.params;
     const id = parseInt(entryId, 10);
@@ -108,7 +124,11 @@ class EntryController {
   }
 
 
-  // delete one entry by its id
+   /**
+   * Delete entry by id 
+   * @param  request
+   * @param  response
+   */
   static deleteEntry(request, response) {
     const { entryId } = request.params;
     const id = parseInt(entryId, 10);
