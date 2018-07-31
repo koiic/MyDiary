@@ -9,12 +9,10 @@ import BaseService from './BaseService';
 class AuthenticationService extends BaseService {
   static createUserAccount(requestData) {
     // query db to check if user exist
-    console.log(requestData);
     db.query(`SELECT email,username FROM users LEFT OUTER JOIN auth ON users.id = auth.id WHERE email = '${requestData.email}' or username = '${requestData.username}'`)
       .then((result) => {
-        console.log(result);
         if (result.rowCount > 0) {
-          console.log('FISHHHHH');
+
           return this.conflictError('User already exists');
         }
         bcrypt.hash(requestData.password.trim(), 10)

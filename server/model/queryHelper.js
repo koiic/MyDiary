@@ -30,9 +30,11 @@ export const createNewEntry = `INSERT INTO entries(
   "title", 
   "note", 
   "is_favourite",
+  "image_url",
   "created_at",
   "updated_at", 
-  "userId")
+  "user_id")
+
 VALUE($1, $2, $3, $4, $5, $6)
 RETURNING *`;
 
@@ -60,7 +62,8 @@ where '${columnName} = '${value}`);
  * @description script to create user authentication
  */
 export const createAuth = (username, password, userId) =>
-  (`INSERT INTO auth("username", "password", "userid")
+  (`INSERT INTO auth("username", "password", "user_id")
+
   VALUES('${username}', '${password}', '${userId}')
   RETURNING *`);
 
@@ -73,14 +76,12 @@ export const createAuth = (username, password, userId) =>
  * @param {String} value the value coming from the client
  */
 export const checkUser = request => (`SELECT email,username FROM users
- LEFT OUTER JOIN auth ON users.id = auth.id 
+ LEFT OUTER JOIN auth ON users.id = auth.user_id 
+
  WHERE email = '${request.email}' 
  or username = '${request.username}'`);
 
 
-  // 'SELECT email, username  From users u JOIN auth  a WHERE (u.id === a.userId)';
-
-  // select email,username from users LEFT OUTER JOIN auth ON users.id = auth.id WHERE email = 'muri@gmail.com' or username = 'hamed';
 
 //  export const insert = (email, firstname, lastname, username, password) => (`WITH newusers as (INSERT INTO users (firstname, lastname, email)
 //  VALUES('${email}', '${firstname}', '${lastname}')

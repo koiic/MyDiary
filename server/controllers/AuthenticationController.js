@@ -16,12 +16,10 @@ class AuthenticationController  {
      */
   static createAccount(request, response) {
     // query db to check if user exist
-    console.log(request.body);
     db.query(checkUser(request.body))
       .then((result) => {
-        console.log(result);
         if (result.rowCount > 0) {
-          console.log('FISHHHHH');
+
           return response.status(409).json({
             message: 'User Already exists',
           });

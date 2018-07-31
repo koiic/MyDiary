@@ -164,7 +164,7 @@ describe('Authentication', () => {
         .post('/api/v1/auth/login')
         .send(login)
         .end((err, response) => {
-          console.log(response);
+
           response.should.have.status(400);
           response.body.should.have.a.property('message').to.equal('Please fill all fields');
           done();
@@ -188,7 +188,8 @@ describe('Authentication', () => {
 
     it('should login a registered user', (done) => {
       const login = {
-        username: 'b2bdfzlwmz6',
+        username: 'hjnb3kbh0ji',
+
         password: 'secret',
       };
       chai.request(app)
