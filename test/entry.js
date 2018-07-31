@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 // const { expect } = chai.expect;
 // const expect = chai.expect();
 const title = Math.random().toString(36).substring(2, 15);
-
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTMzMDUzNTcxLCJleHAiOjE1MzMxMzk5NzF9.cibNXPfnwJu9mj0K8AHnhaFMVz7jIibIJbf8XzYUpko';
 
 describe('DiaryEntries', () => {
   describe('addEntry', () => {
@@ -51,11 +51,12 @@ describe('DiaryEntries', () => {
       const newEntry = {
         title,
         note: 'my new entry',
-        imageUrl: 'dfghjk',
+        imageUrl: 'dfghjk.png',
         isFavourite: true,
       };
       chai.request(app)
         .post('/api/v1/entries/')
+        .set('Authorization', token)
         .send(newEntry)
         .end((err, response) => {
           expect(response.status).toBe(201);
@@ -264,9 +265,7 @@ describe('DiaryEntries', () => {
       //       done();
       //     });
       // });
-  
     });
-
   });
   describe('fetchEntryCount', () => {
     describe('fetch all  entry volume', () => {

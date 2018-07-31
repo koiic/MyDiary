@@ -1,167 +1,53 @@
-import dummyEntries from '../DummyData/dummyEntries';
-import EntryService from '../services/EntryService';
-import DummyDataHelpers from '../helpers/DummyDataHelper';
+import {
+  checkTitle, createNewEntry,
+} from '../model/queryHelper';
+import db from '../model/connect';
+
+/**
+ * Class to execute all entry functions
+ */
 
 class EntryController {
-  // create new entry
+  /**
+     * method to add a new entry
+     * @param {object} request
+     * @param {object} response
+     */
   static addNewEntry(request, response) {
+    // get logged in user id
+    const userId = request.decoded.id;
+    console.log(request);
     const {
-      title, note, isFavourite,
+      title, note, isFavourite, imageUrl,
     } = request.body;
-    const result = EntryService.addEntry(request.body);
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-
-  /**
-   * get all entries
-   * @param {} request
-   * @param {*} response
-   */
-  static getAllEntries(request, response) {
-    if (!dummyEntries || dummyEntries !== undefined) {
-      return response.status(200).json({
-        status: 'success',
-        message: 'fetch all entries succesfully',
-        data: dummyEntries,
+    // check if title exist
+    try {
+      db.query(checkTitle(title, userId))
+        .then((result) => {
+          if (result.rowCount > 0) {
+            return response.status(409).json({
+              message: 'Title already exist, change title',
+            });
+          }
+          db.query(createNewEntry(title, note, imageUrl, isFavourite, userId))
+            .then((queryResult) => {
+              if (queryResult.rowCount === 0) {
+                return response.status(500).json({
+                  message: 'Internal Server Error',
+                });
+              }
+              return response.status(201).json({
+                message: ' Entry Created Successfully',
+                status: 'successful',
+              });
+            });
+        });
+    }
+    catch (error) {
+      return response.status(500).json({
+        message: error,
       });
     }
-    return response.status(404).json({
-      status: 'Failed',
-      message: 'No entries found',
-    });
-  }
-
-  /**
-   * get all entry count
-   * @param  request
-   * @param  response
-   */
-  static getAllEntryCount(request, response) {
-    const result = EntryService.entryVolume(dummyEntries);
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-  /**
-   * get current day entry
-   * 
-   * @param  response
-   */
-  static getTodayEntries(request, response) {
-    const result = EntryService.todaysEntry();
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-  /**
-   * get current day entry count
-   * @param  request
-   * @param  response
-   */
-  static getTodayEntryCount(request, response) {
-    const result = EntryService.todaysEntryVolume();
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-  /**
-   * get entry by id
-   * @param  id
-   * @param  response
-   */
-  static getEntryById(request, response) {
-    const { entryId } = request.params;
-    const id = parseInt(entryId, 10);
-    if (typeof id !== 'number' || isNaN(id)) {
-      return response.status(400).json({
-        status: 'Failed',
-        message: 'id must be a number',
-      });
-    }
-    const result = EntryService.fetchById(id);
-    if (!result) {
-      return response.status(404).json({
-        status: 'Failed',
-        message: `no entry for id ${id}`,
-      });
-    }
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-
-  /**
-   * Update Entry
-   * @param  request
-   * @param  response
-   */
-  static updateEntries(request, response) {
-    const { entryId } = request.params;
-    const id = parseInt(entryId, 10);
-    if (typeof id !== 'number' || isNaN(id)) {
-      return response.status(400).json({
-        status: 'Failed',
-        message: 'id must be a number',
-      });
-    }
-    const result = EntryService.update(request.body, id);
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-
-   /**
-   * Delete entry by id 
-   * @param  request
-   * @param  response
-   */
-  static deleteEntry(request, response) {
-    const { entryId } = request.params;
-    const id = parseInt(entryId, 10);
-    if (typeof id !== 'number' || isNaN(id) || id === '') {
-      return response.status(400).json({
-        status: 'Failed',
-        message: 'id must be a number',
-      });
-    }
-    const result = EntryService.deleteOne(id);
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-  // fetch all favourite entry
-  static getFavouriteEntry(request, response) {
-    const result = EntryService.favouriteEntries();
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
-  }
-
-  // get volume of favourite entry
-  static getFavouriteEntryCount(request, response) {
-    const result = EntryService.favouriteEntriesCount();
-    return response.status(result.status).json({
-      message: result.responseMessage,
-      data: result.responseData,
-    });
   }
 }
-
 export default EntryController;

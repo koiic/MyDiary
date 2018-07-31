@@ -26,16 +26,14 @@ ${tableName} WHERE
  * @name CreateEntriesQuery
  * @description script to create a new entry
  */
-export const createNewEntry = `INSERT INTO entries(
+export const createNewEntry = (title, note, imageUrl,isFavourite, userId) =>  (`INSERT INTO entries(
   "title", 
   "note", 
   "is_favourite",
-  "image_url",
-  "created_at",
-  "updated_at", 
+  "image_url", 
   "user_id")
-VALUE($1, $2, $3, $4, $5, $6)
-RETURNING *`;
+VALUES ('${title}', '${note}','${isFavourite}', '${imageUrl}',  '${userId}')
+RETURNING *`);
 
 /**
  * @name UpdateEntry
@@ -78,6 +76,7 @@ export const checkUser = request => (`SELECT email,username FROM users
  WHERE email = '${request.email}' 
  or username = '${request.username}'`);
 
+export const checkTitle = (title, userId) => (`SELECT title FROM entries  WHERE entries.user_id = '${userId}' and title = '${title}' `);
 
 //  export const insert = (email, firstname, lastname, username, password) => (`WITH newusers as (INSERT INTO users (firstname, lastname, email)
 //  VALUES('${email}', '${firstname}', '${lastname}')
