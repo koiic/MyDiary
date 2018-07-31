@@ -16,7 +16,6 @@ class EntryController {
   static addNewEntry(request, response) {
     // get logged in user id
     const userId = request.decoded.id;
-    console.log(request);
     const {
       title, note, isFavourite, imageUrl,
     } = request.body;
@@ -37,7 +36,7 @@ class EntryController {
                 });
               }
               return response.status(201).json({
-                message: ' Entry Created Successfully',
+                message: 'A new Entry added sucessfully',
                 status: 'successful',
               });
             });

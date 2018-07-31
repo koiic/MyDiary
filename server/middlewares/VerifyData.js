@@ -25,7 +25,7 @@ class VerifyData {
       error.push('Invalid image url');
     }
 
-    if (!isFavourite ) {
+    if (!isFavourite) {
       error.push('Invalid field isFavourite');
     }
 
