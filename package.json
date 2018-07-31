@@ -9,8 +9,9 @@
     "test": "cross-env NODE_ENV=test nyc mocha --require babel-register --timeout 60000 ./test/*.js --exit || true",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "setup": "node  ./setup.js",
-    "migration" : " babel-node --presets babel-preset-env ./server/model/setupTables.js",
-    "drop": " babel-node --presets babel-preset-env ./server/model/dropTable.js"
+    "setup:test": "cross-env NODE_ENV=test babel-node --presets babel-preset-env ./server/model/setupTables.js",
+    "migration" : " babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
+    "drop": " babel-node --presets babel-preset-env ./server/migrations/dropTable.js"
   },
   "repository": { 
     "type": "git",
