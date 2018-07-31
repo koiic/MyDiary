@@ -34,6 +34,7 @@ export const createNewEntry = `INSERT INTO entries(
   "created_at",
   "updated_at", 
   "user_id")
+
 VALUE($1, $2, $3, $4, $5, $6)
 RETURNING *`;
 
@@ -62,6 +63,7 @@ where '${columnName} = '${value}`);
  */
 export const createAuth = (username, password, userId) =>
   (`INSERT INTO auth("username", "password", "user_id")
+
   VALUES('${username}', '${password}', '${userId}')
   RETURNING *`);
 
@@ -75,8 +77,10 @@ export const createAuth = (username, password, userId) =>
  */
 export const checkUser = request => (`SELECT email,username FROM users
  LEFT OUTER JOIN auth ON users.id = auth.user_id 
+
  WHERE email = '${request.email}' 
  or username = '${request.username}'`);
+
 
 
 //  export const insert = (email, firstname, lastname, username, password) => (`WITH newusers as (INSERT INTO users (firstname, lastname, email)

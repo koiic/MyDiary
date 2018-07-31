@@ -12,6 +12,7 @@ class AuthenticationService extends BaseService {
     db.query(`SELECT email,username FROM users LEFT OUTER JOIN auth ON users.id = auth.id WHERE email = '${requestData.email}' or username = '${requestData.username}'`)
       .then((result) => {
         if (result.rowCount > 0) {
+
           return this.conflictError('User already exists');
         }
         bcrypt.hash(requestData.password.trim(), 10)

@@ -19,6 +19,7 @@ class AuthenticationController  {
     db.query(checkUser(request.body))
       .then((result) => {
         if (result.rowCount > 0) {
+
           return response.status(409).json({
             message: 'User Already exists',
           });
