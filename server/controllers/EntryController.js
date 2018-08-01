@@ -1,8 +1,8 @@
 import {
-  checkTitle, createNewEntry, fetchEntries, modifyEntry,
+  checkTitle, createNewEntry, fetchEntries, updateEntriesTable,
 } from '../model/queryHelper';
 import db from '../model/connect';
-import DummyDataHelper from '../helpers/DummyDataHelper';
+import Validation from '../helpers/Validation';
 
 /**
  * Class to execute all entry functions
@@ -16,7 +16,7 @@ class EntryController {
      */
   static addNewEntry(request, response) {
     // get logged in user id
-    const userId = request.decoded.id;
+    const userId = request.decoded.userId;
     const {
       title, note, isFavourite, imageUrl,
     } = request.body;
@@ -51,17 +51,20 @@ class EntryController {
 
   static fetchUserEntries(request, response) {
     // get logged in user id
-    const userId = request.decoded.id;
+    const userId = request.decoded.userId;
     try {
       db.query(fetchEntries(userId))
         .then((result) => {
-          if (result) {
+          if (result.rowCount > 0) {
             return response.status(200).json({
               status: true,
               message: 'fetch entries successfully',
               data: result.rows,
             });
           }
+          return response.status(404).json({
+            message: 'Entries not found',
+          });
         });
     } catch (error) {
       return response.status(500).json({
@@ -73,13 +76,15 @@ class EntryController {
   }
 
   static updateEntries(request, response) {
-    const userId = request.decoded.id;
+    console.log(request.decoded);
+    const userId  = request.decoded.userId;
+    console.log(userId);
     const { entryId } = request.params;
-    const {
-      title, note, isFavourite, imageUrl,
-    } = request.body;
+    // const {
+    //   title, note, isFavourite, imageUrl,
+    // } = request.body;
 
-    const result = DummyDataHelper.validateId(entryId);
+    const result = Validation.isNumber(entryId);
     if (result === false) {
       return response.status(400).json({
         status: 'failed',
@@ -87,8 +92,7 @@ class EntryController {
       });
     }
     try {
-    
-      db.query(modifyEntry(userId, entryId, title, note, isFavourite, imageUrl))
+      db.query(updateEntriesTable(entryId, userId, request.body))
         .then((queryResult) => {
           if (queryResult.rowCount > 0) {
             return response.status(200).json({

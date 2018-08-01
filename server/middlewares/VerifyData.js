@@ -1,34 +1,28 @@
 class VerifyData {
   static entryRequest(request, response, next) {
     const {
-      title, note, imageUrl, isFavourite,
+      title, note,
     } = request.body;
 
-    const specialChar = /[ !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
-
+    const specialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
     const error = [];
 
-    if (!title || title.trim() === '' || typeof title !== 'string') {
-      error.push('title cannot be empty');
+    const requestUrl = request.route.methods;
+
+    if (requestUrl.post) {
+      if (!title || title.trim() === '' || typeof title !== 'string') {
+        error.push('title cannot be empty');
+      }
+
+      if (specialChar.test(title)) {
+        error.push('Invalid title');
+      }
+
+      if (!note || note.trim() === '' || typeof note !== 'string') {
+        error.push('Invalid note');
+      }
     }
-
-    if (specialChar.test(title)) {
-      error.push('Invalid title')
-    }
-
-    if (!note || note.trim() === '' || typeof note !== 'string') {
-      error.push('Invalid note');
-    }
-
-    // if (!imageUrl || typeof note !== 'string') {
-    //   error.push('Invalid image url');
-    // }
-
-    // if (!isFavourite) {
-    //   error.push('Invalid field isFavourite');
-    // }
-
     if (error.length === 0) {
       return next();
     }
