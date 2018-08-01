@@ -1,5 +1,5 @@
 import {
-  checkTitle, createNewEntry, fetchEntries, updateEntriesTable,
+  checkTitle, createNewEntry, fetchEntries, updateEntriesTable,getSingleEntry
 } from '../model/queryHelper';
 import db from '../model/connect';
 import Validation from '../helpers/Validation';
@@ -16,6 +16,7 @@ class EntryController {
      */
   static addNewEntry(request, response) {
     // get logged in user id
+    console.log(request.decoded);
     const userId = request.decoded.userId;
     const {
       title, note, isFavourite, imageUrl,
@@ -77,7 +78,7 @@ class EntryController {
 
   static updateEntries(request, response) {
     console.log(request.decoded);
-    const userId  = request.decoded.userId;
+    const userId = request.decoded.userId;
     console.log(userId);
     const { entryId } = request.params;
     // const {
@@ -112,6 +113,32 @@ class EntryController {
         message: 'internal server error',
       });
     }
+  }
+
+  static fetchSingleEntry(request, response) {
+    const userId = request.decoded.userId;
+    const { entryId } = request.params;
+
+    const result = Validation.isNumber(entryId);
+    if (result === false) {
+      return response.status(400).json({
+        status: 'failed',
+        message: 'Id must be a number',
+      });
+    }
+    db.query(getSingleEntry(userId, entryId))
+      .then((entryResult) => {
+        if (entryResult > 0) {
+          return response.status(200).json({
+            status: 'success',
+            message: `Entry for id : ${entryId} fetched successfully`,
+            data: entryResult.rows,
+          });
+        }
+        return response.status(404).json({
+          message: `Entry not found for id : ${entryId}`,
+        });
+      });
   }
 }
 export default EntryController;
