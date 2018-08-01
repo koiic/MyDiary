@@ -164,6 +164,7 @@ describe('Authentication', () => {
         .post('/api/v1/auth/login')
         .send(login)
         .end((err, response) => {
+
           response.should.have.status(400);
           response.body.should.have.a.property('message').to.equal('Please fill all fields');
           done();

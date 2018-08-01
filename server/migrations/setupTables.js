@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS auth(
     updated_at TIMESTAMP Default Now(), 
     user_id int, 
     CONSTRAINT FK_UserAuth FOREIGN KEY (user_id) REFERENCES users(id)
+
 )`;
 
 const createTableEntry = `
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS entries(
     updated_at TIMESTAMP Default Now(),
     user_id int, 
     CONSTRAINT FK_UserEntries FOREIGN KEY (user_id) REFERENCES users(id)
+
    
 )`;
 

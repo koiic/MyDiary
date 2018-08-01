@@ -41,12 +41,14 @@ class EntryController {
               });
             });
         });
+
     }
     catch (error) {
       return response.status(500).json({
         message: error,
       });
     }
+
   }
 }
 export default EntryController;

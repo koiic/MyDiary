@@ -35,6 +35,7 @@ export const createNewEntry = (title, note, imageUrl,isFavourite, userId) =>  (`
 VALUES ('${title}', '${note}','${isFavourite}', '${imageUrl}',  '${userId}')
 RETURNING *`);
 
+
 /**
  * @name UpdateEntry
  * @description script to update entry by Id
@@ -60,6 +61,7 @@ where '${columnName} = '${value}`);
  */
 export const createAuth = (username, password, userId) =>
   (`INSERT INTO auth("username", "password", "user_id")
+
   VALUES('${username}', '${password}', '${userId}')
   RETURNING *`);
 
@@ -77,6 +79,7 @@ export const checkUser = request => (`SELECT email,username FROM users
  or username = '${request.username}'`);
 
 export const checkTitle = (title, userId) => (`SELECT title FROM entries  WHERE entries.user_id = '${userId}' and title = '${title}' `);
+
 
 //  export const insert = (email, firstname, lastname, username, password) => (`WITH newusers as (INSERT INTO users (firstname, lastname, email)
 //  VALUES('${email}', '${firstname}', '${lastname}')
