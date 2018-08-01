@@ -57,7 +57,7 @@ class EntryController {
           if (result.rowCount > 0) {
             return response.status(200).json({
               status: true,
-              message: 'fetch entries successfuly',
+              message: 'fetch entries successfully',
               data: result.rows,
             });
           }
