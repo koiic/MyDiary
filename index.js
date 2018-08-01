@@ -1,7 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 import entryRoute from './server/routes/entryRoute';
 import authenticationRoute from './server/routes/authenticationRoute';
+
 
 const app = express();
 
@@ -21,6 +24,8 @@ app.get('/', (request, response) => response.status(200).json({
 }));
 app.use('/api/v1/auth', authenticationRoute);
 app.use('/api/v1/entries', entryRoute);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // app.use('/api/v2/entries', entryRoute);
 
 // app.use((err, request, response, next) => {
