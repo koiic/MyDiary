@@ -101,6 +101,20 @@ describe('DiaryEntries', () => {
         });
     });
   });
+  describe('fetchEntry', () => {
+    describe('getAll', () => {
+      it('should fetch all entry', (done) => {
+        chai.request(app)
+          .get('/api/v1/entries/')
+          .set('Authorization', token)
+          .end((err, response) => {
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty('message', 'fetch entries successfully');
+            done();
+          });
+      });
+    });
+  });
   // describe('updateEntry', () => {
   //   describe('modifyEntry', () => {
   //     it('should not update if id is not a number', (done) => {
@@ -159,19 +173,7 @@ describe('DiaryEntries', () => {
   //     });
   //   });
   // });
-  // describe('fetchEntry', () => {
-  //   describe('getAll', () => {
-  //     it('should fetch all entry', (done) => {
-  //       chai.request(app)
-  //         .get('/api/v1/entries/')
-  //         .end((err, response) => {
-  //           expect(response.status).toBe(200);
-  //           expect(response.body).toHaveProperty('message', 'fetch all entries succesfully');
-  //           done();
-  //         });
-  //     });
-  //   });
-  // });
+  
   // describe('fetchSingleEntry', () => {
   //   describe('fetchOne', () => {
   //     it('should not fetch entry if id is not a number', (done) => {

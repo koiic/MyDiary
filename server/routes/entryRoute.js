@@ -7,7 +7,7 @@ import VerifyData from '../middlewares/VerifyData';
 const entryRoute = Router();
 entryRoute.post('/', VerifyToken.tokenVerification, VerifyData.entryRequest, EntryController.addNewEntry);
 // entryRoute.put('/:entryId', EntryController.updateEntries);
-// entryRoute.get('/', EntryController.getAllEntries);
+entryRoute.get('/', VerifyToken.tokenVerification, EntryController.fetchUserEntries);
 // entryRoute.get('/today', EntryController.getTodayEntries);
 // entryRoute.get('/count', EntryController.getAllEntryCount);
 // entryRoute.get('/today/count', EntryController.getTodayEntryCount);
