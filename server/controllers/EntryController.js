@@ -1,5 +1,5 @@
 import {
-  checkTitle, createNewEntry, fetchEntries, updateEntriesTable,getSingleEntry
+  checkTitle, createNewEntry, fetchEntries, updateEntriesTable, getSingleEntry,
 } from '../model/queryHelper';
 import db from '../model/connect';
 import Validation from '../helpers/Validation';
@@ -16,7 +16,7 @@ class EntryController {
      */
   static addNewEntry(request, response) {
     // get logged in user id
-    console.log(request.decoded);
+    // console.log(request.decoded);
     const userId = request.decoded.userId;
     const {
       title, note, isFavourite, imageUrl,
@@ -40,6 +40,7 @@ class EntryController {
               return response.status(201).json({
                 message: 'A new Entry added sucessfully',
                 status: 'successful',
+                data: queryResult.row,
               });
             });
         });
@@ -77,9 +78,9 @@ class EntryController {
   }
 
   static updateEntries(request, response) {
-    console.log(request.decoded);
+    // console.log(request.decoded);
     const userId = request.decoded.userId;
-    console.log(userId);
+    // console.log(userId);
     const { entryId } = request.params;
     // const {
     //   title, note, isFavourite, imageUrl,
@@ -126,9 +127,10 @@ class EntryController {
         message: 'Id must be a number',
       });
     }
+    console.log("----->", getSingleEntry(userId, entryId));
     db.query(getSingleEntry(userId, entryId))
-      .then((entryResult) => {
-        if (entryResult > 0) {
+      .then((entryResult) => {      
+        if (entryResult.rowCount > 0) {
           return response.status(200).json({
             status: 'success',
             message: `Entry for id : ${entryId} fetched successfully`,
