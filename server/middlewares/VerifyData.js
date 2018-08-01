@@ -21,13 +21,13 @@ class VerifyData {
       error.push('Invalid note');
     }
 
-    if (!imageUrl || typeof note !== 'string') {
-      error.push('Invalid image url');
-    }
+    // if (!imageUrl || typeof note !== 'string') {
+    //   error.push('Invalid image url');
+    // }
 
-    if (!isFavourite) {
-      error.push('Invalid field isFavourite');
-    }
+    // if (!isFavourite) {
+    //   error.push('Invalid field isFavourite');
+    // }
 
     if (error.length === 0) {
       return next();

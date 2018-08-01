@@ -14,7 +14,7 @@ class DummyDataHelpers {
   static validateId(entryId) {
     // let error;
     const id = parseInt(entryId, 10);
-    if (isNaN(id) || typeof id !== 'number') {
+    if (!id || isNaN(id) || typeof id !== 'number') {
       return false;
     }
 

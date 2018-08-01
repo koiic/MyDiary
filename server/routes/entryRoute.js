@@ -6,7 +6,7 @@ import VerifyData from '../middlewares/VerifyData';
 // instantiate AuthRoute
 const entryRoute = Router();
 entryRoute.post('/', VerifyToken.tokenVerification, VerifyData.entryRequest, EntryController.addNewEntry);
-// entryRoute.put('/:entryId', EntryController.updateEntries);
+entryRoute.put('/:entryId', VerifyToken.tokenVerification, VerifyData.entryRequest, EntryController.updateEntries);
 entryRoute.get('/', VerifyToken.tokenVerification, EntryController.fetchUserEntries);
 // entryRoute.get('/today', EntryController.getTodayEntries);
 // entryRoute.get('/count', EntryController.getAllEntryCount);

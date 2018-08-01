@@ -40,11 +40,15 @@ export const fetchEntries = userId => (`SELECT * FROM entries WHERE entries.user
  * @name UpdateEntry
  * @description script to update entry by Id
  */
-export const updateEntry = (selectedColumn, tableName, columnName, value, id) => (`UPDATE '${tableName}' 
-SET '${selectedColumn}' =
-'${value} where 
-'${columnName} =
-'${id}`);
+export const modifyEntry = (userId, entryId, title, note, isFavourite, imageUrl) => (`UPDATE entries 
+SET title = '${title}',
+note = '${note}',
+is_Favourite = '${isFavourite}',
+image_url = '${imageUrl}'
+ WHERE entries.user_id = ${userId}
+ and entries.id = ${entryId} and
+ created_at::date = CURRENT_DATE
+ RETURNING *`);
 
 
 /**
@@ -78,8 +82,10 @@ export const checkUser = request => (`SELECT email,username FROM users
 
 export const checkTitle = (title, userId) => (`SELECT title FROM entries  WHERE entries.user_id = '${userId}' and title = '${title}' `);
 
+export const checkEntryDate = (userId, entryId) => (`SELECT id FROM entries WHERE entries.user_id = '${userId}' and id = '${entryId}' and created_at = CURRENT_DATE`)
 
-//  export const insert = (email, firstname, lastname, username, password) => (`WITH newusers as (INSERT INTO users (firstname, lastname, email)
+// const update = BEGIN;
+// SELECT id FROM entries WHERE entries.user_id = '${userId}' and id = '${entryId}' and created_at = CURRENT_DATE FOR UPDATE; '//  export const insert = (email, firstname, lastname, username, password) => (`WITH newusers as (INSERT INTO users (firstname, lastname, email)
 //  VALUES('${email}', '${firstname}', '${lastname}')
 //     returning id) INSERT INTO auth (username, password, userId) values
 //   ( VALUES('${username}', '${password}',(select id from newusers)`);
