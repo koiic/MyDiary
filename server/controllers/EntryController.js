@@ -1,5 +1,5 @@
 import {
-  checkTitle, createNewEntry,
+  checkTitle, createNewEntry,fetchEntries
 } from '../model/queryHelper';
 import db from '../model/connect';
 
@@ -41,14 +41,40 @@ class EntryController {
               });
             });
         });
-
-    }
-    catch (error) {
+    } catch (error) {
       return response.status(500).json({
         message: error,
       });
     }
+  }
 
+  static fetchUserEntries(request, response) {
+    // get logged in user id
+    const userId = request.decoded.id;    
+    try {
+      db.query(fetchEntries(userId))
+        .then((result) => {
+          if (result.rowCount > 0) {
+            return response.status(200).json({
+              status: true,
+              message: 'fetch entries successfuly',
+              data: result.rows,
+            });
+          }
+          return response.status(200).json({
+            status: true,
+            message: 'No entries for user',
+            data: result.body,
+          });
+        });
+    }
+    catch (error) {
+      return response.status(500).json({
+        status: 'fail',
+        message: 'Internal Server Error',
+        data: error,
+      });
+    }
   }
 }
 export default EntryController;

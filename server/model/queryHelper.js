@@ -3,8 +3,7 @@
  * @description script to create a new user
  */
 
-export const createNewUser = (email, firstname, lastname) =>
-  (`INSERT INTO users("email", "firstname", "lastname")
+export const createNewUser = (email, firstname, lastname) => (`INSERT INTO users("email", "firstname", "lastname")
 VALUES('${email}', '${firstname}', '${lastname}')
   RETURNING *`);
 
@@ -16,8 +15,7 @@ VALUES('${email}', '${firstname}', '${lastname}')
  * @param {String} columnName  where, from client matches data from user
  * @param {String} value the value coming from the client
  */
-export const findOne = (selectedColumn, tableName, columnName, value) =>
-  (`SELECT ${selectedColumn} FROM 
+export const findOne = (selectedColumn, tableName, columnName, value) => (`SELECT ${selectedColumn} FROM 
 ${tableName} WHERE
  ${columnName} = '${value}'`);
 
@@ -26,7 +24,7 @@ ${tableName} WHERE
  * @name CreateEntriesQuery
  * @description script to create a new entry
  */
-export const createNewEntry = (title, note, imageUrl,isFavourite, userId) =>  (`INSERT INTO entries(
+export const createNewEntry = (title, note, imageUrl, isFavourite, userId) => (`INSERT INTO entries(
   "title", 
   "note", 
   "is_favourite",
@@ -34,6 +32,8 @@ export const createNewEntry = (title, note, imageUrl,isFavourite, userId) =>  (`
   "user_id")
 VALUES ('${title}', '${note}','${isFavourite}', '${imageUrl}',  '${userId}')
 RETURNING *`);
+
+export const fetchEntries = userId => (`SELECT * FROM entries WHERE entries.user_id  = '${userId}'`);
 
 
 /**
@@ -51,16 +51,14 @@ SET '${selectedColumn}' =
  * @name DeleteENtry
  * @description script to delete entry by Id
  */
-export const deleteEntry = (tableName, columnName, value) =>
-  (`DELETE FROM '${tableName} 
+export const deleteEntry = (tableName, columnName, value) => (`DELETE FROM '${tableName} 
 where '${columnName} = '${value}`);
 
 /**
  * @name CreateAuthQuery
  * @description script to create user authentication
  */
-export const createAuth = (username, password, userId) =>
-  (`INSERT INTO auth("username", "password", "user_id")
+export const createAuth = (username, password, userId) => (`INSERT INTO auth("username", "password", "user_id")
 
   VALUES('${username}', '${password}', '${userId}')
   RETURNING *`);
