@@ -1,0 +1,295 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "My Diarry API",
+      "description": "An API that that provides functionality for users to pen down their thoughts and memories"
+    },
+    "schemes": [
+      "https"
+    ],
+    "host": "diarry.herokuapp.com",
+    "basePath": "/api/v1",
+    "tags": [
+      {
+        "name": "Auth",
+        "description": "Authenticate a user"
+      },
+      {
+        "name": "Entries",
+        "description": "Entries Operations"
+      },
+      
+    ],
+    "paths": {
+      "/auth/login": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Login the API to get authentication token",
+          "consumes": [ "application/x-www-form-urlencoded" ],
+          "parameters": [
+            {
+              "name": "username",
+              "in": "formData",
+              "description": "The username for login",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "password",
+              "in": "formData",
+              "description": "The password for login in clear text",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "description": "Returns an authentication token on success.",
+          "responses": {
+            "200": {
+              "description": "User login successfully, return user details and token",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "400": {
+              "description": "Invalid username or password"
+            },
+            "401": {
+              "description": "Invalid username or password"
+            }
+          }
+        }
+      },
+      "/auth/signup": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Create an account on the API to get authentication token and saved in database",
+          "description": "Returns user details and authentication token on success.",
+          "consumes": [ "application/x-www-form-urlencoded" ],
+          "parameters": [
+             {
+              "name": "firstname",
+              "in": "formData",
+              "description": "The firstname of the user account to be created",
+              "required": true,
+              "type": "string"
+            },
+            {
+                "name": "lastname",
+                "in": "formData",
+                "description": "The lastname of the user account to be created",
+                "required": true,
+                "type": "string"
+              },
+            {
+              "name": "email",
+              "in": "formData",
+              "description": "The email for the user account to be created",
+              "required": true,
+              "type": "string"
+            },
+            {
+                "name": "username",
+                "in": "formData",
+                "description": "The username of the user account to be created",
+                "required": true,
+                "type": "string"
+              },
+            {
+              "name": "password",
+              "in": "formData",
+              "description": "The password for the user account to be created",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "User Creation Successfully, return user details and token",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "400": {
+              "description": "Invalid Email"
+            },
+            "409": {
+                "description": "User Already exist"
+            },
+            "500": {
+                "description": "Internal Server Error"
+            }
+          }
+        }
+      },
+      "/entries": {
+        "get": {
+          "tags": [
+            "Entries"
+          ],
+          "summary": "Fetch all the entries of a logged in user",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authorization token",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "description": "Returns an object of entries on success.",
+          "responses": {
+            "200": {
+              "description": "fetch entries successfully",
+              "schema": {
+                "$ref": "#/definitions/Entries"
+              }
+            },
+            "401": {
+              "description": "Fail to authenticate token"
+            },
+            "403": {
+              "description": "No token Provided"
+            },
+            "400": {
+              "description": "title cannot be empty"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Entries"
+          ],
+          "summary": "Create a new entries",
+          "consumes": [ "application/x-www-form-urlencoded" ],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authorization token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "title",
+              "in": "formData",
+              "description": "Entry title",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "note",
+              "in": "formData",
+              "description": "Entry note",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "imageUrl",
+              "in": "formData",
+              "description": "Image file path",
+              "required": true,
+              "type": "string"
+            }
+            {
+                "name": "isFavourite",
+                "in": "formData",
+                "description": "specified favorite entry",
+                "required": true,
+                "type": "string"
+              }
+          ],
+          "description": "Returns an object of the created entry on success.",
+          "responses": {
+            "201": {
+              "description": "A new Entry added sucessfully",
+              "schema": {
+                "$ref": "#/definitions/Entries"
+              }
+            },
+            "400": {
+              "description": "Error {}}"
+            },
+            "409": {
+              "description": "Title already exist, change titlet"
+            }
+          }
+        }
+      },
+      "/entries/{id}": {
+        "get": {
+          "tags": [
+            "Entries"
+          ],
+          "summary": "Fetch a single entries for a user",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authorization token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The ID of the entry to succesfully",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "description": "Returns an object of entry on success.",
+          "responses": {
+            "200": {
+              "description": "Entry for id fetched successfulll",
+              "schema": {
+                "$ref": "#/definitions/Entries"
+              }
+            },
+            "401": {
+              "description": "Fail to authenticate token"
+            },
+            "404": {
+              "description": "Entry not found for id"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Entries"
+          ],
+          "summary": "Update an entry",
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Authorization token",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "id",
+              "in": "path",
+              "description": "The ID of the entry to be modified",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "description": "Returns https status code 200 on success.",
+          "responses": {
+            "201": {
+              "description": "An entry with ${entryId} has been updated successfully",
+              "schema": {
+                "$ref": "#/definitions/Entries"
+              }
+            }
+          }
+        },
+    }
+     
+  }
+  

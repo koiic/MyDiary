@@ -11,11 +11,10 @@
     "setup": "node  ./setup.js",
     "setup:test": "cross-env NODE_ENV=test babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
     "drop:test": "cross-env NODE_ENV=test babel-node --presets babel-preset-env ./server/migrations/dropTable.js",
-    "migrate" : " babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
-
+    "migrate": " babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
     "drop": " babel-node --presets babel-preset-env ./server/migrations/dropTable.js"
   },
-  "repository": { 
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/koiic/MyDiary.git"
   },
@@ -33,14 +32,15 @@
     "babel-core": "^6.26.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
-    "dotenv": "^6.0.0",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "chai-things": "^0.2.0",
     "cross-env": "^5.2.0",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
-    "pg": "^7.4.3"
+    "pg": "^7.4.3",
+    "swagger-ui-express": "^3.0.10"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
