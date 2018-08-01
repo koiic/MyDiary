@@ -82,10 +82,33 @@ export const checkUser = request => (`SELECT email,username FROM users
 
 export const checkTitle = (title, userId) => (`SELECT title FROM entries  WHERE entries.user_id = '${userId}' and title = '${title}' `);
 
-export const checkEntryDate = (userId, entryId) => (`SELECT id FROM entries WHERE entries.user_id = '${userId}' and id = '${entryId}' and created_at = CURRENT_DATE`)
+export const checkEntryDate = (userId, entryId) => (`SELECT id FROM entries WHERE entries.user_id = '${userId}' and id = '${entryId}' and created_at = CURRENT_DATE`);
 
-// const update = BEGIN;
-// SELECT id FROM entries WHERE entries.user_id = '${userId}' and id = '${entryId}' and created_at = CURRENT_DATE FOR UPDATE; '//  export const insert = (email, firstname, lastname, username, password) => (`WITH newusers as (INSERT INTO users (firstname, lastname, email)
-//  VALUES('${email}', '${firstname}', '${lastname}')
-//     returning id) INSERT INTO auth (username, password, userId) values
-//   ( VALUES('${username}', '${password}',(select id from newusers)`);
+
+export const updateEntriesTable = (entryId, userId, request) => {
+  let updateQuery = 'UPDATE entries SET ';
+  let changeUpdate = false;
+
+  if (request.title) {
+    updateQuery += ` ${(changeUpdate) ? ',' : ''} title = '${request.title}'`;
+    changeUpdate = true;
+  }
+  if (request.note) {
+    updateQuery += ` ${(changeUpdate) ? ',' : ''} note = '${request.note}'`;
+    changeUpdate = true;
+  }
+  if (request.imageUrl) {
+    updateQuery += ` ${(changeUpdate) ? ',' : ''} image_url= '${request.imageUrl}'`;
+    changeUpdate = true;
+  }
+  if (request.isFavourite) {
+    updateQuery += ` ${(changeUpdate) ? ',' : ''} is_favourite = '${request.isFavourite}'`;
+    changeUpdate = true;
+  }
+
+  if (changeUpdate) {
+    updateQuery += `WHERE entries.user_id = ${userId} and entries.id = ${entryId} 
+    and created_at::date = CURRENT_DATE RETURNING *`;
+  }
+  return updateQuery;
+};

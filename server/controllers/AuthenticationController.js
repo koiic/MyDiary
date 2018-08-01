@@ -5,21 +5,27 @@ import {
 } from '../model/queryHelper';
 import db from '../model/connect';
 import config from '../config/config';
+import Validation from '../helpers/Validation';
 /**
  * Authentication class
  */
-class AuthenticationController  {
+class AuthenticationController {
   /**
      * @name createUserAccount
      * @description create a new user
      *
      */
   static createAccount(request, response) {
+
+    const validEmail = Validation.isEmail(request.body.email);
+    if (!validEmail) {
+      return response.status(400).json({ message: 'Invalid email' });
+    }
+
     // query db to check if user exist
     db.query(checkUser(request.body))
       .then((result) => {
         if (result.rowCount > 0) {
-
           return response.status(409).json({
             message: 'User Already exists',
           });
@@ -38,7 +44,8 @@ class AuthenticationController  {
                 db.query(createAuth(
                   request.body.username,
                   hashedPassword,
-                  queryResult.rows[0].id))
+                  queryResult.rows[0].id
+))
                   .then((authResult) => {
                     if (authResult.rowCount === 0) {
                       return response.status(500).json({
@@ -46,7 +53,7 @@ class AuthenticationController  {
                       });
                     }
                     // Generate token after creating user to automtically log in
-                    const token = jwt.sign({ id: queryResult.rows[0].id },
+                    const token = jwt.sign({ userId: queryResult.rows[0].id },
                       config.jwtSecret, { expiresIn: 86400 });
                     return response.status(201).json({
                       message: 'User Creation Successfully',
@@ -69,7 +76,7 @@ class AuthenticationController  {
           result.rows[0].password);
         if (validatePassword) {
           // create new token if user exists, token expires in next 24 hours
-          const token = jwt.sign({ id: result.rows[0].id },
+          const token = jwt.sign({ userId: result.rows[0].id },
             config.jwtSecret, { expiresIn: 86400 });
           return response.status(200).json({
             message: 'User login successfully',

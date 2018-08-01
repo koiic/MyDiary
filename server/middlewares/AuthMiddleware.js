@@ -12,18 +12,18 @@ class AuthMiddleWare {
  * @param {object} response - Response object
  * @param {function} next - middleware next (for error handling)
  */
-  static validateEmail(request, response, next) {
-    const { email } = request.body;
+  // static validateEmail(request, response, next) {
+  //   const { email } = request.body;
 
-    const emailPattern = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+.([a-zA-Z])+([a-zA-Z])+/;
+  //   const emailPattern = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+.([a-zA-Z])+([a-zA-Z])+/;
 
-    if (!emailPattern.test(email.trim())) {
-      return response.status(400).json({ message: 'Invalid email' });
-    }
-    next();
+  //   if (!emailPattern.test(email.trim())) {
+  //     return response.status(400).json({ message: 'Invalid email' });
+  //   }
+  //   next();
 
-    return null;
-  }
+  //   return null;
+  // }
 
 
   /**
