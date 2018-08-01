@@ -181,30 +181,43 @@ describe('DiaryEntries', () => {
     });
   });
   
-  // describe('fetchSingleEntry', () => {
-  //   describe('fetchOne', () => {
-  //     it('should not fetch entry if id is not a number', (done) => {
-  //       const id = 'ola';
-  //       chai.request(app)
-  //         .get(`/api/v1/entries/${id}`)
-  //         .end((err, response) => {
-  //           expect(response.status).toBe(400);
-  //           expect(response.body).toHaveProperty('message', 'id must be a number');
-  //           done();
-  //         });
-  //     });
-  //     it('should fetch entry if id exist', (done) => {
-  //       const id = 1;
-  //       chai.request(app)
-  //         .get(`/api/v1/entries/${id}`)
-  //         .end((err, response) => {
-  //           expect(response.status).toBe(200);
-  //           expect(response.body).toHaveProperty('message', `An entry with ${id} has been fetched successfully`);
-  //           done();
-  //         });
-  //     });
-  //   });
-  // });
+  describe('fetchSingleEntry', () => {
+    describe('fetchOne', () => {
+      it('should not fetch entry if id is not a number', (done) => {
+        const id = 'ola';
+        chai.request(app)
+          .get(`/api/v1/entries/${id}`)
+          .set('Authorization', token)
+          .end((err, response) => {
+            expect(response.status).toBe(400);
+            expect(response.body).toHaveProperty('message', 'Id must be a number');
+            done();
+          });
+      });
+      it('should fetch entry if id exist', (done) => {
+        const id = 1;
+        chai.request(app)
+          .get(`/api/v1/entries/${id}`)
+          .set('Authorization', token)
+          .end((err, response) => {
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty('message', `Entry for id : ${id} fetched successfully`);
+            done();
+          });
+      });
+      it('should not fetch entry if id does not  exist', (done) => {
+        const id = 1000;
+        chai.request(app)
+          .get(`/api/v1/entries/${id}`)
+          .set('Authorization', token)
+          .end((err, response) => {
+            expect(response.status).toBe(404);
+            expect(response.body).toHaveProperty('message', `Entry not found for id : ${id}`);
+            done();
+          });
+      });
+    });
+  });
   // describe('deleteEntry', () => {
   //   describe('removeEntry', () => {
   //     it('should not delete entry if id is not valid', (done) => {

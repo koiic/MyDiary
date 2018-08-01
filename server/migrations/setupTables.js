@@ -43,21 +43,21 @@ CREATE TABLE IF NOT EXISTS entries(
 
 db.query(createTableUsers).then((res) => {
   if (res) {
-    console.log('User table created  successfullyy');
+    //console.log('User table created  successfullyy');
   } else {
-    console.log('Error creating User table');
+    //console.log('Error creating User table');
   }
   db.query(createTableAuth).then((res) => {
     if (res) {
-      console.log('Auth table created successfullyy');
+      //console.log('Auth table created successfullyy');
     } else {
-      console.log('Error creating Auth table');
+      //console.log('Error creating Auth table');
     }
     db.query(createTableEntry).then((res) => {
       if (res) {
-        console.log('Entry table created successfullyy');
+        //console.log('Entry table created successfullyy');
       } else {
-        console.log('Error creating entry table');
+        //console.log('Error creating entry table');
       }
     });
   });

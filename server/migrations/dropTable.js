@@ -16,21 +16,21 @@ DROP TABLE IF EXISTS entries`;
 
 db.query(dropAuth).then((res) => {
   if (res) {
-    console.log('auth table dropped  successfully');
+    //console.log('auth table dropped  successfully');
   } else {
-    console.log('Error dropping auth table');
+    //console.log('Error dropping auth table');
   }
   db.query(dropEntry).then((res) => {
     if (res) {
-      console.log('entries table dropped successfuly');
+      //console.log('entries table dropped successfuly');
     } else {
-      console.log('Error dropping  entries table');
+      //console.log('Error dropping  entries table');
     }
     db.query(dropUser).then((res) => {
       if (res) {
-        console.log('users table dropped successfully');
+        //console.log('users table dropped successfully');
       } else {
-        console.log('Error dropping User table');
+        //console.log('Error dropping User table');
       }
       db.end();
     });
