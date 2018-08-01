@@ -21,6 +21,7 @@ app.get('/', (request, response) => response.status(200).json({
 }));
 app.use('/api/v1/auth', authenticationRoute);
 app.use('/api/v1/entries', entryRoute);
+// app.use('/api/v2/entries', entryRoute);
 
 // app.use((err, request, response, next) => {
 //   response.locals.error = err;

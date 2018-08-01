@@ -189,7 +189,6 @@ describe('Authentication', () => {
     it('should login a registered user', (done) => {
       const login = {
         username: 'hjnb3kbh0ji',
-
         password: 'secret',
       };
       chai.request(app)

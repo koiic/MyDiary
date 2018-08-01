@@ -11,8 +11,8 @@
     "setup": "node  ./setup.js",
     "setup:test": "cross-env NODE_ENV=test babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
     "drop:test": "cross-env NODE_ENV=test babel-node --presets babel-preset-env ./server/migrations/dropTable.js",
+    "migrate" : " babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
 
-    "migration" : " babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
     "drop": " babel-node --presets babel-preset-env ./server/migrations/dropTable.js"
   },
   "repository": { 
