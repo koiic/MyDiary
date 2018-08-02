@@ -81,9 +81,9 @@ class AuthenticationController {
           const token = jwt.sign({ userId: result.rows[0].id },
             config.jwtSecret, { expiresIn: 86400 });
           return response.status(200).json({
-            status: 'success'
+            status: 'success',
             message: 'User login successfully',
-            email: result.rows[0].email,
+            username: result.rows[0].username,
             token,
           });
         }

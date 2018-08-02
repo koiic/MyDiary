@@ -254,6 +254,7 @@ a {
 .column {
     flex: 1;
     margin-right: 20px;
+    
 }
 
 .column:last-child {
@@ -843,4 +844,9 @@ p-0 {
     text-decoration: none;
     cursor: pointer;
   }
+
+  .column.all-entry-width {
+    width: calc(90%/3);
+    flex:unset;
+}
   
