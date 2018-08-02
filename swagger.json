@@ -18,7 +18,7 @@
       {
         "name": "Entries",
         "description": "Entries Operations"
-      },
+      }
       
     ],
     "paths": {
@@ -194,7 +194,7 @@
               "description": "Image file path",
               "required": true,
               "type": "string"
-            }
+            },
             {
                 "name": "isFavourite",
                 "in": "formData",
@@ -288,8 +288,9 @@
               }
             }
           }
-        },
+        }
     }
      
   }
+}
   
