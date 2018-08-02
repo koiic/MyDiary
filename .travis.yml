@@ -16,7 +16,7 @@ before_script:
   - psql -c 'CREATE TABLE IF NOT EXISTS entries(id SERIAL PRIMARY KEY, title VARCHAR(255)  NOT NULL, note VARCHAR(255) NOT NULL,  is_favourite BOOLEAN DEFAULT false,image_url VARCHAR(255) DEFAULT NULL,created_at TIMESTAMP Default Now(),updated_at TIMESTAMP Default Now(),user_id int, CONSTRAINT FK_UserEntries FOREIGN KEY (user_id) REFERENCES users(id));' -U postgres -d travis_ci_test
   - psql -c "INSERT INTO users (firstname, lastname, email) VALUES ('Ismail','ibrahim', 'ismail@gmail.com');" -U postgres -d travis_ci_test
   - psql -c "INSERT INTO auth (username, password, user_id) VALUES ('fomuq1mypnw', '$2a$10$i3iS.zXHEJuOaGUcld7Kie9LLUO7tM7ZRg8xyNNCY1gsLieu7EyVm', 1);" -U postgres -d travis_ci_test
-  - psql -c "INSERT INTO entries (title, note, image_url, is_favourite, user_id) VALUES ('Thisistitle', 'I lovemy job', 'image.png', true,  1);" -U postgres -d travis_ci_test
+  - psql -c "INSERT INTO entries (title, note, image_url, user_id) VALUES ('Thisistitle', 'I lovemy job', 'image.png', 1);" -U postgres -d travis_ci_test
 
   
 script:

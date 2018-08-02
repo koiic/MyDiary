@@ -4,7 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
 import entryRoute from './server/routes/entryRoute';
 import authenticationRoute from './server/routes/authenticationRoute';
-
+import cors from 'cors';
 
 const app = express();
 
@@ -17,6 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
+
+app.use(cors());
 // Base Routes
 app.get('/', (request, response) => response.status(200).json({
   status: 'success',
@@ -26,14 +28,7 @@ app.use('/api/v1/auth', authenticationRoute);
 app.use('/api/v1/entries', entryRoute);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// app.use('/api/v2/entries', entryRoute);
 
-// app.use((err, request, response, next) => {
-//   response.locals.error = err;
-//   const status = err.status || 500;
-//   response.status(status >= 100 && status < 600 ? err.code : 500);
-//   next(err);
-// });
 
 
 app.listen(port, () => {
