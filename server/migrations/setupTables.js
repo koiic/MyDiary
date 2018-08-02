@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS entries(
     id SERIAL PRIMARY KEY, 
     title VARCHAR(255)  NOT NULL, 
     note VARCHAR(255) NOT NULL, 
-    is_favourite BOOLEAN DEFAULT false,
     image_url VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP Default Now(),
     updated_at TIMESTAMP Default Now(),
@@ -43,19 +42,19 @@ CREATE TABLE IF NOT EXISTS entries(
 
 db.query(createTableUsers).then((res) => {
   if (res) {
-    //console.log('User table created  successfullyy');
+    console.log('User table created  successfullyy');
   } else {
     //console.log('Error creating User table');
   }
   db.query(createTableAuth).then((res) => {
     if (res) {
-      //console.log('Auth table created successfullyy');
+      console.log('Auth table created successfullyy');
     } else {
       //console.log('Error creating Auth table');
     }
     db.query(createTableEntry).then((res) => {
       if (res) {
-        //console.log('Entry table created successfullyy');
+        console.log('Entry table created successfullyy');
       } else {
         //console.log('Error creating entry table');
       }
