@@ -9,6 +9,23 @@ const email = Math.random().toString(36).substring(2, 15);
 
 describe('Authentication', () => {
   describe('registration', () => {
+    it('should signup if fields are valid', (done) => {
+      const signup = {
+        email: 'calory@gmail.com',
+        firstname: 'fish',
+        lastname: 'octopus',
+        username,
+        password: 'secret',
+      };
+      chai.request(app)
+        .post('/api/v1/auth/signup')
+        .send(signup)
+        .end((err, response) => {
+          response.should.have.status(201);
+          response.body.should.be.a('object');
+          done();
+        });
+    });
     it('should not signup if email is empty', (done) => {
       const signup = {
         email: '',
@@ -45,7 +62,7 @@ describe('Authentication', () => {
         });
     });
 
-    it('Can not signup if email is not present', (done) => {
+    it('Should not signup if email is not present', (done) => {
       const signup = {
         firstname: 'fish',
         lastname: 'octopus',
@@ -116,27 +133,9 @@ describe('Authentication', () => {
         });
     });
 
-    it('should signup if fields are valid', (done) => {
-      const signup = {
-        email: `${email}@gmail.com`,
-        firstname: 'fish',
-        lastname: 'octopus',
-        username,
-        password: 'secret',
-      };
-      chai.request(app)
-        .post('/api/v1/auth/signup')
-        .send(signup)
-        .end((err, response) => {
-          response.should.have.status(201);
-          response.body.should.be.a('object');
-          done();
-        });
-    });
-
     it('should not signup if username exist', (done) => {
       const signup = {
-        email: `${email}@gmail.com`,
+        email: 'bala@gmail.com',
         firstname: 'fish',
         lastname: 'octopus',
         username: 'bsn4cbj9av',
@@ -155,6 +154,20 @@ describe('Authentication', () => {
   });
 
   describe('login', () => {
+    it('should login a registered user', (done) => {
+      const login = {
+        username: 'p3ri3irgv7',
+        password: 'secret',
+      };
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(login)
+        .end((err, response) => {
+          response.should.have.status(200);
+          response.body.should.be.an('object');
+          done();
+        });
+    });
     it('should not login if username is empty', (done) => {
       const login = {
         username: '',
@@ -173,7 +186,7 @@ describe('Authentication', () => {
 
     it('should not login if password is incorrect', (done) => {
       const login = {
-        username: 'amw6hwexjm',
+        username: 'hjnb3kbh0ji',
         password: 'secret555',
       };
       chai.request(app)
@@ -185,25 +198,9 @@ describe('Authentication', () => {
           done();
         });
     });
-
-    it('should login a registered user', (done) => {
-      const login = {
-        username: 'hjnb3kbh0ji',
-        password: 'secret',
-      };
-      chai.request(app)
-        .post('/api/v1/auth/login')
-        .send(login)
-        .end((err, response) => {
-          response.should.have.status(200);
-          response.body.should.be.an('object');
-          done();
-        });
-    });
-
     it('should not login if password is empty', (done) => {
       const login = {
-        username: 'amw6hwexjm',
+        username: 'hjnb3kbh0ji',
         password: '',
       };
       chai.request(app)

@@ -1,7 +1,7 @@
 class VerifyData {
   static entryRequest(request, response, next) {
     const {
-      title, note,
+      title, note
     } = request.body;
 
     const specialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;

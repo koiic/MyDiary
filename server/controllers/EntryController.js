@@ -19,10 +19,12 @@ class EntryController {
     // console.log(request.decoded);
     const userId = request.decoded.userId;
     const {
-      title, note, isFavourite, imageUrl,
+      title, note, imageUrl,
     } = request.body;
+    
     // check if title exist
     try {
+     
       db.query(checkTitle(title, userId))
         .then((result) => {
           if (result.rowCount > 0) {
@@ -30,7 +32,8 @@ class EntryController {
               message: 'Title already exist, change title',
             });
           }
-          db.query(createNewEntry(title, note, imageUrl, isFavourite, userId))
+          
+          db.query(createNewEntry(title, note, imageUrl, userId))
             .then((queryResult) => {
               if (queryResult.rowCount === 0) {
                 return response.status(500).json({
@@ -82,9 +85,7 @@ class EntryController {
     const userId = request.decoded.userId;
     // console.log(userId);
     const { entryId } = request.params;
-    // const {
-    //   title, note, isFavourite, imageUrl,
-    // } = request.body;
+    
 
     const result = Validation.isNumber(entryId);
     if (result === false) {
@@ -127,9 +128,9 @@ class EntryController {
         message: 'Id must be a number',
       });
     }
-    console.log("----->", getSingleEntry(userId, entryId));
+    console.log('----->', getSingleEntry(userId, entryId));
     db.query(getSingleEntry(userId, entryId))
-      .then((entryResult) => {      
+      .then((entryResult) => {
         if (entryResult.rowCount > 0) {
           return response.status(200).json({
             status: 'success',

@@ -180,7 +180,6 @@ describe('DiaryEntries', () => {
       });
     });
   });
-  
   describe('fetchSingleEntry', () => {
     describe('fetchOne', () => {
       it('should not fetch entry if id is not a number', (done) => {

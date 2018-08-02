@@ -24,13 +24,12 @@ ${tableName} WHERE
  * @name CreateEntriesQuery
  * @description script to create a new entry
  */
-export const createNewEntry = (title, note, imageUrl, isFavourite, userId) => (`INSERT INTO entries(
+export const createNewEntry = (title, note, imageUrl, userId) => (`INSERT INTO entries(
   "title", 
   "note", 
-  "is_favourite",
   "image_url", 
   "user_id")
-VALUES ('${title}', '${note}','${isFavourite}', '${imageUrl}',  '${userId}')
+VALUES ('${title}', '${note}', '${imageUrl}',  '${userId}')
 RETURNING *`);
 
 export const getSingleEntry = (userId, entryId) => `
@@ -45,10 +44,9 @@ export const fetchEntries = userId => (`SELECT * FROM entries WHERE entries.user
  * @name UpdateEntry
  * @description script to update entry by Id
  */
-export const modifyEntry = (userId, entryId, title, note, isFavourite, imageUrl) => (`UPDATE entries 
+export const modifyEntry = (userId, entryId, title, note, imageUrl) => (`UPDATE entries 
 SET title = '${title}',
 note = '${note}',
-is_Favourite = '${isFavourite}',
 image_url = '${imageUrl}'
  WHERE entries.user_id = ${userId}
  and entries.id = ${entryId} and
@@ -106,11 +104,7 @@ export const updateEntriesTable = (entryId, userId, request) => {
     updateQuery += ` ${(changeUpdate) ? ',' : ''} image_url= '${request.imageUrl}'`;
     changeUpdate = true;
   }
-  if (request.isFavourite) {
-    updateQuery += ` ${(changeUpdate) ? ',' : ''} is_favourite = '${request.isFavourite}'`;
-    changeUpdate = true;
-  }
-
+ 
   if (changeUpdate) {
     updateQuery += `WHERE entries.user_id = ${userId} and entries.id = ${entryId} 
     and created_at::date = CURRENT_DATE RETURNING *`;
