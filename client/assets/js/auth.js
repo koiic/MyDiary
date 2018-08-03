@@ -25,18 +25,24 @@ function createAccount(e) {
     headers: header,
     body: JSON.stringify(requestBody),
   })
-    .then((response) => {
-        return response.json();
-    })
-    .then((result) => {
-      if(result.status === 'success') {
-        const token = result.data;
-        localStorage.token = token;
-        window.location.replace('entries.html');
-      }else{
-        swal('failed', result.message, 'error');
-      }
-     
+  //   .then((response) => {
+  //       console.log('->--->', response);
+  //       return response.json();
+    // })
+    .then((res) => {
+      // console.log('-->-->', result.json());
+      res.json().then(result=> {
+        console.log('work', result);
+        if(result.status === 'success') {
+       
+          const token  = result.data;
+          console.log('tke', token);
+          localStorage.setItem('token', token);
+          window.location.replace('entries.html');
+        }else{
+          swal('failed', result.message, 'error');
+        }
+      });
     })
     
 }
