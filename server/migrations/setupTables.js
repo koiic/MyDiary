@@ -1,7 +1,8 @@
 import pg from 'pg';
 import config from '../config/config';
 
-const db = (process.env.NODE_ENV === 'test') ? new pg.Pool(config.test) : new pg.Pool(config.database);
+const db = (process.env.NODE_ENV === 'test') ? new pg.Pool(config.test) 
+  : process.env.NODE_ENV == 'production' ? new pg.Pool(config.production) : new pg.Pool(config.database);
 
 
 const createTableUsers = `
@@ -44,19 +45,19 @@ db.query(createTableUsers).then((res) => {
   if (res) {
     console.log('User table created  successfullyy');
   } else {
-    //console.log('Error creating User table');
+    // console.log('Error creating User table');
   }
   db.query(createTableAuth).then((res) => {
     if (res) {
       console.log('Auth table created successfullyy');
     } else {
-      //console.log('Error creating Auth table');
+      // console.log('Error creating Auth table');
     }
     db.query(createTableEntry).then((res) => {
       if (res) {
         console.log('Entry table created successfullyy');
       } else {
-        //console.log('Error creating entry table');
+        // console.log('Error creating entry table');
       }
     });
   });

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard My-Diary</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="bg-grey">
+    <div class="app">
+        <div class="header">
+            <div class="navbar fixed-top">
+                <div class="shelter">
+                    <div class="navbar__nav nav__logo nav__underline">
+                        <i class="fa fa-book"></i><span class="highlight">My</span>-Diarry
+
+                    </div>
+                    <div class="navbar__nav navbar__nav-toggle">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nav class="nav__items">
+                        <div class="navbar__nav nav__underline">
+                            <a href="dashboard.html" class="nav__link ">
+                                <span></span> Dashboard
+                            </a>
+                        </div>
+                        <div class="navbar__nav nav__underline">
+                            <a href="entries.html" class="nav__link">
+                                <span></span> Entries
+                                <!-- <i class="pr-1 fa fa-book"> </i> -->
+                            </a>
+                        </div>
+                        <div class="navbar__nav nav__underline">
+                            <a href="settings.html" class="nav__link active">
+                                <span></span> Settings
+                            </a>
+                        </div>
+
+                    </nav>
+                    <nav class="nav__items nav__items-right">
+                        <div class="navbar__nav">
+                            <div class="navbar__nav">
+
+                                <button class="btn account__btn">Ismail</button>
+
+                            </div>
+                        </div>
+                    </nav>
+                    
+                </div>
+                <!--end container-->
+            </div>
+            <!--end navbar-->
+        </div>
+        <section>
+            <div class="shelter">
+                <div class="dashboard__card mt-5">
+                    <div class="row">
+
+                        <div class="column"></div>
+                        <div class="column pt-5">
+                                <div class="form-card"> 
+
+                                <h5> Profile </h5>
+
+                                <div class="form-row">
+                                        <label for="name">Firstname:</label>
+                                        <input type="text" class="form-control" placeholder="Ismail" required minlength="3" maxlength="30">
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="name">Lastname:</label>
+                                        <input type="text" class="form-control" placeholder="Ibrahim" required minlength="3" maxlength="30">
+                                    </div>
+                                    <div class="form-row">
+                                        <label for="name"></label>Email:</label>
+                                        <input type="email" class="form-control" placeholder="fish@gmail.com" required minlength="3" maxlength="30">
+                                    </div>
+
+
+                                <p>notification </p>
+                                <form>
+                                    <div class="form-row">
+                                        <input class="tgl tgl-flat" id="cb4" type="checkbox" /> Enable Notifications
+                                    </div>
+                                    <br>
+                                    <div class="form-row">
+                                        Choose Time : <input type="time" id="startTime">
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <a href="dashboard.html">
+                                        <button type="button" class="btn account__btn btn-block">Update</button>
+                                    </a>
+
+                                    <div class="form-row"></div>
+                                    <div class="form-row"></div>
+
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
+                        <div class="column"></div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <section>
+        <div class="footer">
+            <div class="navbar fixed-bottom py-1 bg-white">
+                <div class="shelter">                   
+                    <nav class="nav__items nav__items-right">
+                        <div class="navbar__nav">
+                            <div class="display">
+                                <a href="#" class="dodgerblue">
+                      &copy; Ismail Ibrahim [Andela Cycle34 2018].
+                    </a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <!--end shelter-->
+            </div>
+            <!--end navbar-->
+        </div>
+    </section>
+    </div>
+    <script src="./assets/js/toggle.js"></script>
+</body>
+
+</html>

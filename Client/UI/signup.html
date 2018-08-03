@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login </title>
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro|Roboto|Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="bg-grey">
+    <div class="signup">
+        <div class="header">
+            <div class="navbar fixed-top">
+                <div class="shelter">
+                    <div class="navbar__nav nav__logo nav__underline">
+                        
+                            <i class="fa fa-book"></i><span class="highlight">My</span>-Diarry
+                        </div>
+                    <div class="navbar__nav navbar__nav-toggle">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nav class="nav__items nav__items-right">
+                        <div class="navbar__nav pr-0">
+                            <a href="signin.html">
+                                <button class="btn btn-light">Login</button>
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+                <!--end container-->
+            </div>
+            <!--end navbar-->
+        </div>
+        <section>
+            <div class="shelter">
+                <div class="row">
+                    <div class="column"></div>
+                    <div class="column">
+                       
+                                <div class="form pt-top">
+                                    <h1 class="text-center nav__logo app-color">Registration</h1>
+                                    <div class="form-card">
+                                        <form id="createAccount">
+                                            <div class="form-row">
+                                                <label for="name">Firstname:</label>
+                                                <input type="text" class="form-control" placeholder="Enter your firstname" required minlength="3" maxlength="30" id="firstname">
+                                            </div>
+                                            <div class="form-row">
+                                                <label for="name">Lastname:</label>
+                                                <input type="text" class="form-control" placeholder="Enter your lastname" required minlength="3" maxlength="30" id="lastname">
+                                            </div>
+                                            <div class="form-row">
+                                                <label for="name">Email:</label>
+                                                <input type="email" class="form-control" placeholder="Enter your email" required minlength="3" maxlength="50" id="email">
+                                            </div>
+
+                                            <div class="form-row">
+                                                <label for="name">Username:</label>
+                                                <input type="text" class="form-control" placeholder="Enter your username" required minlength="3" maxlength="30" id="username">
+                                            </div>
+
+                                            <div class="form-row">
+                                                <label for="name">Password</label>
+                                                <input type="password" class="form-control" required placeholder="Enter your name" id="password">
+                                            </div>
+                                        
+                                                <button type="submit" class="btn account__btn btn-block">Sign up</button>
+                                        </form>
+                                    </div>
+                                    <p>Already Have an Account Sign In <a href="signin.html">here</a></p>
+                                </div>
+                        
+
+                    </div>
+                    <div class="column"></div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="footer">
+                <div class="navbar py-1 bg-white">
+                    <div class="shelter">
+                      
+                        <nav class="nav__items nav__items-right">
+                            <div class="navbar__nav">
+                                <div class="display">
+                                    <a href="#" class="dodgerblue">
+                          &copy; Ismail Ibrahim [Andela Cycle34 2018].
+                        </a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <!--end shelter-->
+                </div>
+                <!--end navbar-->
+            </div>
+        </section>
+    </div>
+    <script src="./assets/js/toggle.js"></script>
+    <script src="./assets/js/auth.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+</body>
+
+</html>

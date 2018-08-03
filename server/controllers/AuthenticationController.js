@@ -16,10 +16,9 @@ class AuthenticationController {
      *
      */
   static createAccount(request, response) {
-
-    const validEmail = Validation.isEmail(request.body.email);
-    if (!validEmail) {
-      return response.status(400).json({ message: 'Invalid email' });
+    const validPassword = Validation.isPassword(request.body.password);
+    if (!validPassword) {
+      return response.status(400).json({ message: 'Password should not be lesser than 4' });
     }
 
     // query db to check if user exist
@@ -44,8 +43,8 @@ class AuthenticationController {
                 db.query(createAuth(
                   request.body.username,
                   hashedPassword,
-                  queryResult.rows[0].id
-))
+                  queryResult.rows[0].id,
+                ))
                   .then((authResult) => {
                     if (authResult.rowCount === 0) {
                       return response.status(500).json({
@@ -56,13 +55,16 @@ class AuthenticationController {
                     const token = jwt.sign({ userId: queryResult.rows[0].id },
                       config.jwtSecret, { expiresIn: 86400 });
                     return response.status(201).json({
+                      status: 'success',
                       message: 'User Creation Successfully',
+                      user: authResult.rows,
                       data: token,
                     });
                   });
               });
           });
-      });
+      })
+      .catch(err => err);
   }
 
   static login(request, response) {
@@ -79,13 +81,15 @@ class AuthenticationController {
           const token = jwt.sign({ userId: result.rows[0].id },
             config.jwtSecret, { expiresIn: 86400 });
           return response.status(200).json({
+            status: 'success',
             message: 'User login successfully',
-            email: result.rows[0].email,
+            username: result.rows[0].username,
             token,
           });
         }
         return response.status(400).json({ message: 'Invalid username or password' });
-      });
+      })
+      .catch(err => err);
   }
 }
 

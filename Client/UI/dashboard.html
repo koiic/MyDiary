@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard My-Diary</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body class="bg-grey">
+    <div class="app">
+        <div class="header">
+            <div class="navbar fixed-top">
+                <div class="shelter">
+                    <div class="navbar__nav nav__logo nav__underline">
+                        
+                        <i class="fa fa-book"></i><span class="highlight">My</span>-Diarry
+                    </div>
+                    <div class="navbar__nav navbar__nav-toggle">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nav class="nav__items">
+                        <div class="navbar__nav nav__underline">
+                            <a href="dashboard.html" class="nav__link active">
+                                <span></span> Dashboard
+                            </a>
+                        </div>
+                        <div class="navbar__nav nav__underline">
+                            <a href="entries.html" class="nav__link">
+                                <span></span> Entries
+                                <!-- <i class="pr-1 fa fa-book"> </i> -->
+                            </a>
+                        </div>
+                        <div class="navbar__nav nav__underline">
+                            <a href="settings.html" class="nav__link">
+                                <span></span> Settings
+                            </a>
+                        </div>
+
+                    </nav>
+                   
+                    <nav class="nav__items nav__items-right">
+
+                        <button type="button" class="btn account__btn" id="modalBtn">
+                                        Create Entry <i class="fa fa-plus"></i>
+                        </button></a>
+                    </nav>
+
+                    <nav class="nav__items nav__items-right">
+                            <div class="navbar__nav">
+                                <div class="navbar__nav my-1" class="nav_link" id="username">
+                                        <span></span> User
+                                </div>
+                            </div>
+                    </nav>
+                </div>
+                <!--end container-->
+            </div>
+            <!--end navbar-->
+        </div>
+        <section>
+            <div class="shelter">
+                <div class="dashboard__card mt-5">
+                    <div class="orders">
+                        <div class="row">
+                            <div class="column">
+                                <div class="card">
+                                    <div class="card__row">
+                                        <div>
+                                            <span><i class="wechat fa-3x fa fa-check-square"></i></span>
+                                        </div>
+                                        <div>
+                                            <div class="card__title app-color">Today's Entry</div>
+                                            <div class="card__body">7</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="card">
+                                    <div class="card__row">
+                                        <div>
+                                            <span><i class="wechat fa-3x fa fa-trash"></i></span>
+                                        </div>
+                                        <div>
+                                            <div class="card__title app-color">Deleted Entries</div>
+                                            <div class="card__body">200</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column">
+                                <div class="card">
+                                    <div class="card__row">
+                                        <div>
+                                            <span><i class="wechat fa-3x fa fa-caret-down"></i></span>
+                                        </div>
+                                        <div>
+                                            <div class="card__title app-color">All Entries</div>
+                                            <div class="card__body">500</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                                <h2 class="lightblue">Recent </h2>
+                                <div id="entryBody">
+                                    
+                                </div>
+                                <!--end row-->
+                                <!-- <div class="row">
+                                    <div class="column">
+                                        <div class="card">
+                                            <div class="justify-content-space-between">
+                                                <div class="text-indent">
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, soluta.</p>
+                                                    <div>
+                                                        <span>Date Created: 23-07-2018</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <a href="edit.html"><button class="btn account__btn"> Edit</button></a>
+                                                </div>
+                                                <div>
+                                                    <button class="btn account__btn2">Delete </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!--end row-->
+                                <!-- <div class="row">
+                                    <div class="column">
+                                        <div class="card">
+                                            <div class="justify-content-space-between">
+                                                <div class="text-indent">
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, soluta.</p>
+                                                    <div>
+                                                        <span>Date Created: 23-07-2018</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <a href="edit.html"><button class="btn account__btn"> Edit</button></a>
+                                                </div>
+                                                <div>
+                                                    <button class="btn account__btn2">Delete </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!--end row-->
+                                <!-- <div class="row">
+                                    <div class="column">
+                                        <div class="card">
+                                            <div class="justify-content-space-between">
+                                                <div class="text-indent">
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, soluta.</p>
+                                                    <div>
+                                                        <span>Date Created: 23-07-2018</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <a href="edit.html"><button class="btn account__btn"> Edit</button></a>
+                                                </div>
+                                                <div>
+                                                    <button class="btn account__btn2">Delete </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!--end row-->
+                                <!-- <div class="row">
+                                    <div class="column">
+                                        <div class="card">
+                                            <div class="justify-content-space-between">
+                                                <div class="text-indent">
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, soluta.</p>
+                                                    <div>
+                                                        <span>Date Created: 23-07-2018</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <a href="edit.html"><button class="btn account__btn"> Edit</button></a>
+                                                </div>
+                                                <div>
+                                                    <button class="btn account__btn2">Delete </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!--end row-->
+                                <!-- <div class="row">
+                                    <div class="column">
+                                        <div class="card">
+                                            <div class="justify-content-space-between">
+                                                <div class="text-indent">
+                                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, soluta.</p>
+                                                    <div>
+                                                        <span>Date Created: 23-07-2018</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <a href="edit.html"><button class="btn account__btn"> Edit</button></a>
+                                                </div>
+                                                <div>
+                                                    <button class="btn account__btn2">Delete </button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!--end row-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section>
+            <div class="footer">
+                <div class="navbar fixed-bottom py-1 bg-white">
+                    <div class="shelter">                       
+                        <nav class="nav__items nav__items-right">
+                            <div class="navbar__nav">
+                                <div class="display">
+                                    <a href="#" class="dodgerblue">
+                          &copy; Ismail Ibrahim [Andela Cycle34 2018].
+                        </a>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                    <!--end shelter-->
+                </div>
+                <!--end navbar-->
+            </div>
+        </section>
+        <section>
+            <div id="simpleModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="closeBtn">&times;</span>
+                        <h2>Create Entry</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form id="createEntry">
+                            <div class="form-row">
+                            <label for="name">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="Entry title" required>
+                            </div>
+                            <div class="form-row">
+                                <label for="name">Note</label>
+                                <textarea type="text" class="form-control" id="note" placeholder="Description" required></textarea>
+                            </div>
+                            <div class="form-row">
+                                <label for="name">Image:</label>
+                                <input id="imageUrl" input= "image" type="file" accept="image/*">
+                            </div>
+                            <div class="modal-footer">
+                                    <button class="btn account__btn" type="submit"><i class="fa fa-plus"></i> Add</button>
+                            </div>
+                        </form>
+                    </div><!--end modal body-->
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/fetchentry.js"></script>
+    <script src="./assets/js/createEntry.js"></script>
+</body>
+
+</html>

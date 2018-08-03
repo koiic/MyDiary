@@ -15,12 +15,28 @@ const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhd
 
 describe('DiaryEntries', () => {
   describe('addEntry', () => {
+    it('should add new entry if request is correct', (done) => {
+      const newEntry = {
+        title: 'Thenewgame',
+        note: 'my new entry',
+        imageUrl: 'dfghjk.png',
+      };
+      chai.request(app)
+        .post('/api/v1/entries/')
+        .set('Authorization', token)
+        .send(newEntry)
+        .end((err, response) => {
+          expect(response.status).toBe(201);
+          expect(response.body.message).toEqual('A new Entry added sucessfully');
+          done();
+        });
+    });
     it('should not add new entry if title is empty', (done) => {
       const newEntry = {
         title: '',
         note: 'my new entry',
         imageUrl: 'dfghjk',
-        isFavourite: true,
+
       };
       chai.request(app)
         .post('/api/v1/entries/')
@@ -37,7 +53,7 @@ describe('DiaryEntries', () => {
         title: '*&*()',
         note: 'my new entry',
         imageUrl: 'dfghjk',
-        isFavourite: true,
+
       };
       chai.request(app)
         .post('/api/v1/entries/')
@@ -49,12 +65,12 @@ describe('DiaryEntries', () => {
           done();
         });
     });
-    it('should not add new entry if title exist', (done) => {
+    it('should not add new entry if title exist in database', (done) => {
       const newEntry = {
-        title: '3a7eql033cm',
+        title: 'Thenewgame',
         note: 'my new entry',
         imageUrl: 'calory.png',
-        isFavourite: true,
+        
       };
       chai.request(app)
         .post('/api/v1/entries/')
@@ -71,7 +87,7 @@ describe('DiaryEntries', () => {
         title: 'FirstTitle',
         note: ' ',
         imageUrl: 'dfghjk',
-        isFavourite: true,
+        
       };
       chai.request(app)
         .post('/api/v1/entries/')
@@ -83,23 +99,7 @@ describe('DiaryEntries', () => {
           done();
         });
     });
-    it('should add new entry if request is correct', (done) => {
-      const newEntry = {
-        title,
-        note: 'my new entry',
-        imageUrl: 'dfghjk.png',
-        isFavourite: true,
-      };
-      chai.request(app)
-        .post('/api/v1/entries/')
-        .set('Authorization', token)
-        .send(newEntry)
-        .end((err, response) => {
-          expect(response.status).toBe(201);
-          expect(response.body.message).toEqual('A new Entry added sucessfully');
-          done();
-        });
-    });
+   
   });
   describe('fetchEntry', () => {
     describe('getAll', () => {
@@ -124,7 +124,6 @@ describe('DiaryEntries', () => {
 
           title: 'firstupdate',
           note: ' lorem ipsum calculs',
-          isFavourite: false,
           imageUrl: 'calory.jpg',
         };
         chai.request(app)
@@ -144,7 +143,6 @@ describe('DiaryEntries', () => {
 
           title: 'firstupdate',
           note: ' lorem ipsum calculs',
-          isFavourite: false,
           imageUrl: 'calory.jpg',
         };
         chai.request(app)
@@ -164,7 +162,6 @@ describe('DiaryEntries', () => {
 
           title: 'Thenewgame',
           note: ' lorem ipsum calculs',
-          isFavourite: false,
           imageUrl: 'calory.jpg',
         };
         chai.request(app)
