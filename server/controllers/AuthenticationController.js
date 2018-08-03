@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import {
-  checkUser, findOne, createNewUser, createAuth,
+  checkUser, findUser, findUserById, createNewUser, createAuth,
 } from '../model/queryHelper';
 import db from '../model/connect';
 import config from '../config/config';
@@ -68,7 +68,7 @@ class AuthenticationController {
   }
 
   static login(request, response) {
-    db.query(findOne('*', 'auth', 'username', request.body.username))
+    db.query(findUser('*', 'auth', 'username', request.body.username))
       .then((result) => {
         if (result.rowCount === 0) {
           return response.status(400).json({ message: 'Invalid username or password' });
@@ -90,6 +90,31 @@ class AuthenticationController {
         return response.status(400).json({ message: 'Invalid username or password' });
       })
       .catch(err => err);
+  }
+
+  static fetchProfile(request, response) {
+    const { userId } = request.decoded;
+
+    const result = Validation.isNumber(userId);
+    if (result === false) {
+      return response.status(400).json({
+        status: 'failed',
+        message: 'Id must be a number',
+      });
+    }
+    db.query(findUserById(userId))
+      .then((queryResult) => {
+        if (result.rowCount === 0) {
+          return response.status(404).json({ message: 'cannot find user with id' });
+        }
+        // Check if password is valid/Matched
+        return response.status(200).json({
+          status: 'success',
+          message: 'User fetched successfully',
+          data: queryResult.rows[0],
+
+        });
+      }).catch(err => err);
   }
 }
 

@@ -14,7 +14,7 @@ function createAccount(e) {
   };
 
   console.log(requestBody);
-  const url = 'http://localhost:5000/api/v1/auth/signup';
+  const url = '/api/v1/auth/signup';
 
   const header = {
     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function createAccount(e) {
       if(result.status === 'success') {
         const token = result.data;
         localStorage.token = token;
-        window.location.replace('content.html');
+        window.location.replace('entries.html');
       }else{
         swal('failed', result.message, 'error');
       }

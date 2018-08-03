@@ -1,7 +1,7 @@
 document.onreadystatechange = function () {
   if (document.readyState === 'complete') {
     // document is ready. Do your stuff here
-    const url = 'http://localhost:5000/api/v1/entries';
+    const url = '/api/v1/entries';
     const token = localStorage.getItem('token');
     console.log('---->', fetch, token);
     fetch(url, {

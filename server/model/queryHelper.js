@@ -15,10 +15,12 @@ VALUES('${email}', '${firstname}', '${lastname}')
  * @param {String} columnName  where, from client matches data from user
  * @param {String} value the value coming from the client
  */
-export const findOne = (selectedColumn, tableName, columnName, value) => (`SELECT ${selectedColumn} FROM 
+export const findUser = (selectedColumn, tableName, columnName, value) => (`SELECT ${selectedColumn} FROM 
 ${tableName} WHERE
  ${columnName} = '${value}'`);
 
+ export const findUserById = userId => (`SELECT * FROM 
+users WHERE id = '${userId}'`);
 
 /**
  * @name CreateEntriesQuery

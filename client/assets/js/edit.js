@@ -1,5 +1,5 @@
-const id = window.location.search.split('')[1];
-const url = `http://localhost:5000/api/v1/entries/${id}`;
+const id = window.location.search.split('?')[1];
+const url = `/api/v1/entries/${id}`;
 const token = localStorage.getItem('token');
 const editBtn = document.getElementById('edit');
 const updateBtn = document.getElementById('update');
