@@ -1,6 +1,19 @@
 import pg from 'pg';
 import config from '../config/config';
 
-const db = (process.env.NODE_ENV === 'test') ? new pg.Pool(config.test) : new pg.Pool(config.database);
+const nodeEnv = process.env.NODE_ENV;
 
-export default db;
+let db = null;
+
+switch (nodeEnv) {
+    case 'production':
+        db = config.production;
+        break;
+    case 'test':
+        db = config.test;
+        break;
+    default:
+        db = config.database;
+}
+
+export default new pg.Pool(db);
