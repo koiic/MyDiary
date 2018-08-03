@@ -12,7 +12,7 @@ class Validation {
   static isEmail(email) {
     const emailPattern = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+.([a-zA-Z])+([a-zA-Z])+/;
 
-    if (!emailPattern.test(email)) {
+    if (!email || email.trim() === '', !emailPattern.test(email)) {
       return false;
     }
     return true;
@@ -21,6 +21,13 @@ class Validation {
   static isString(value) {
     const specialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
     if (!specialChar.test(value)) {
+      return false;
+    }
+    return true;
+  }
+
+  static isPassword(password) {
+    if (password.length < 4) {
       return false;
     }
     return true;

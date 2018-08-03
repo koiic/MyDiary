@@ -530,6 +530,7 @@ a {
     width: 150%;
     background: #fff;
     color: #222;
+    padding-top: 15px;
     padding: .375rem .75rem;
     border-top: 4px solid #cded5a;
     border-top-right-radius: 5px; 
@@ -557,7 +558,7 @@ a {
 
 label {
     display: inline-block;
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
 }
 
 .signin>h2>a {
@@ -674,7 +675,9 @@ p-0 {
 .p-5 {
     padding: 5rem;
 }
-
+.pt-top {
+    padding-top: 15px;
+}
 .p-10 {
     padding: 10px !important;
 }
@@ -713,6 +716,10 @@ p-0 {
 
 .mt-5 {
     margin-top: 5rem;
+}
+
+.mt-10 {
+
 }
 
 .my-1 {
@@ -769,6 +776,10 @@ p-0 {
 
 .app-color {
     color: #fcce3f !important;
+}
+
+.date-color {
+    color: #ffc900
 }
 
 .flex {
@@ -849,4 +860,31 @@ p-0 {
     width: calc(90%/3);
     flex:unset;
 }
+.row.entry {
+    flex-wrap: unset;
+}
   
+.entry-header {
+    width: 30%;
+    margin-right: 30px;
+}
+
+.entry-content {
+    width: 65%;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.hide {
+    display: none;
+}
+
+.delete-btn {
+    color:#ceacac;
+
+}
+.delete-btn:hover {
+    color : #3c3c3c;
+}

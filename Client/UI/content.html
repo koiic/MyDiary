@@ -42,13 +42,11 @@
 
                     </nav>
                     <nav class="nav__items nav__items-right">
-                        <div class="navbar__nav">
                             <div class="navbar__nav">
-
-                                <button class="btn account__btn">Ismail</button>
-
+                                <div class="navbar__nav my-1" class="nav_link" id="username">
+                                         <span></span> User
+                                </div>
                             </div>
-                        </div>
                     </nav>
                     <nav class="nav__items nav__items-right">
 
@@ -61,29 +59,28 @@
         <section>
             <div class="shelter">
                 <div class="dashboard__card mt-5">
-                    <div class="row">
-                        <div class="column"></div>
-                        <div class="column">
-                                <div class="entry-content">
-                                        <h1>My Last Birthday Party</h1>
-                                        <div class="card__image">
-                                            <img class="img__shelter" src="./assets/images/noteroom-icon.png">
-                                        </div>                        
-                                        <p class="text-format text-indent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta nesciunt sint beatae excepturi? Et aut libero, dolores perspiciatis recusandae magni suscipit tempore dolorem dicta sunt eveniet quod doloremque commodi voluptatum
-                                            quibusdam pariatur doloribus quis. Ratione labore quasi iste, ipsum non debitis ab molestiae eius quam officiis quo? Molestiae maiores repellendus ab unde voluptas eaque quidem aut labore, reprehenderit aliquam! Similique at
-                                            expedita debitis enim alias ab cupiditate praesentium amet consequuntur quaerat laudantium nulla impedit, odio nostrum! Nemo nesciunt atque possimus suscipit quod, quas dolorem corporis nobis, officiis laudantium quaerat sapiente
-                                            voluptas ut veritatis voluptates cumque perspiciatis repellendus voluptatum optio dolorum.</p>
-                                        <p class="text-format text-indent">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta nesciunt sint beatae excepturi? Et aut libero, dolores perspiciatis recusandae magni suscipit tempore dolorem dicta sunt eveniet quod doloremque commodi voluptatum
-                                            quibusdam pariatur doloribus quis. Ratione labore quasi iste, ipsum non debitis ab molestiae eius quam officiis quo? Molestiae maiores repellendus ab unde voluptas eaque quidem aut labore, reprehenderit aliquam! Similique at
-                                            expedita debitis enim alias ab cupiditate praesentium amet consequuntur quaerat laudantium nulla impedit, odio nostrum! Nemo nesciunt atque possimus suscipit quod, quas dolorem corporis nobis, officiis laudantium quaerat sapiente
-                                            voluptas ut veritatis voluptates cumque perspiciatis repellendus voluptatum optio dolorum.</p>
-                                        <p>Created date : 23-07-2018</p>
-                
-                                    </div>
+                        <div class="row entry " id="entryContent" >
+                            <div class="entry-header">
+                                <h2 id="title" contenteditable="false">My Last Birthday Party</h2>
+                                <div class="card__image">
+                                    <img class="img__shelter" src="./assets/images/noteroom-icon.png">
+                                </div> 
+                            </div>
+                            <div class="entry-content">
+                                                        
+                                <p class="text-format text-indent" id="note" contenteditable="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta nesciunt sint beatae excepturi? Et aut libero, dolores perspiciatis recusandae magni suscipit tempore dolorem dicta sunt eveniet quod doloremque commodi voluptatum
+                                    quibusdam pariatur doloribus quis. Ratione labore quasi iste, ipsum non debitis ab molestiae eius quam officiis quo? Molestiae maiores repellendus ab unde voluptas eaque quidem aut labore, reprehenderit aliquam! Similique at
+                                    expedita debitis enim alias ab cupiditate praesentium amet consequuntur quaerat laudantium nulla impedit, odio nostrum! Nemo nesciunt atque possimus suscipit quod, quas dolorem corporis nobis, officiis laudantium quaerat sapiente
+                                    voluptas ut veritatis voluptates cumque perspiciatis repellendus voluptatum optio dolorum.</p> 
+                                <p id="createdDate">Created date : 23-07-2018</p>
+                                <div class="text-right">
+                                    <button class="btn account__btn" id="edit" onclick="editTrue();">Edit</button>button class="btn account__btn" id="edit" onclick="editTrue();">Edit</button>
+                                    <button class="btn account__btn hide" id="update" onclick="updateEntry();">Update</button>
+                                </div>
+        
+                            </div>
+                                    
                         </div>
-                        <div class="column"></div>
-
-                    </div>
                    
                 </div>
             </div>
@@ -109,6 +106,7 @@
         </section>
     </div>
     <script src="./assets/js/toggle.js"></script>
+    <script src="./assets/js/edit.js"></script>
 </body>
 
 </html>

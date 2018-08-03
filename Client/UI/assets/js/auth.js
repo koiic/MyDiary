@@ -32,7 +32,7 @@ function createAccount(e) {
       if(result.status === 'success') {
         const token = result.data;
         localStorage.token = token;
-        window.location.replace('dashboard.html');
+        window.location.replace('content.html');
       }else{
         swal('failed', result.message, 'error');
       }

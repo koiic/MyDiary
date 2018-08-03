@@ -44,11 +44,9 @@
 
                             </nav>
                             <nav class="nav__items nav__items-right">
-                                <div class="navbar__nav">
-                                    <div class="navbar__nav">
-
-                                        <button class="btn account__btn">Ismail</button>
-
+                                 <div class="navbar__nav">
+                                     <div class="navbar__nav my-1" class="nav_link" id="username">
+                                                    <span></span> 
                                     </div>
                                 </div>
                             </nav>
@@ -71,37 +69,34 @@
                         <div class="column"></div>
                         <div class="column">
                             
-                                <div class="form pt-5">
+                                <div class="form">
                                     <h1 class="nav__logo app-color">Edit Entry</h1>
                                     <div class="form-card">
                                         <!-- <p>Please fill in your details</p> -->
                                         <form>
                                             <div class="form-row">
-                                                <label for="name">Title</label>
-                                                <input type="text" class="form-control" value="Morning Note">
+                                                <label for="name" >Title</label>
+                                                <input type="text" id="title" class="form-control" value="Morning Note">
                                             </div>
                                             <div class="form-row">
-                                                <label for="name">Body</label>
-                                                <textarea type="text" class="form-control" value="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, soluta.</textarea>
+                                                <label for="name">Note</label>
+                                                <textarea type="text" id="title" class="form-control" value="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, soluta.</textarea>
                                             </div>
                                             <div>
                                                 <label for="name">Image</label>
-                                                <input type="file" name="pic" accept="image/*">
+                                                <input id="imageUrl" type="file" name="pic" accept="image/*">
                                             </div>
                                             <div class="form-row">
                                                 <label for="name">Date:</label>
                                                 <input type="date" class="form-control" placeholder="23-07-2018">
                                             </div>
-                                            
+                                            <div class="form-row">
+                                                    <a href="entries.html"><button class="btn account__btn"><i class="fa fa-edit"></i> Update</button></a>
+                                            </div>
                                         </form>
-                                        <br>
-                                        <div>
-                                                <a href="entries.html"><button class="btn account__btn"><i class="fa fa-edit"></i> Update</button></a>
-                                        </div>
-                                    </div>
-
-                                   
-                                    
+                                       
+                                        
+                                    </div>   
                                 </div>
                         </div>
                         <div class="column"></div>

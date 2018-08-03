@@ -42,20 +42,20 @@
                         </div>
 
                     </nav>
-                    <nav class="nav__items nav__items-right">
-                        <div class="navbar__nav">
-                            <div class="navbar__nav" id="username">
-
-                                Ismail
-
-                            </div>
-                        </div>
-                    </nav>
+                   
                     <nav class="nav__items nav__items-right">
 
                         <button type="button" class="btn account__btn" id="modalBtn">
                                         Create Entry <i class="fa fa-plus"></i>
                         </button></a>
+                    </nav>
+
+                    <nav class="nav__items nav__items-right">
+                            <div class="navbar__nav">
+                                <div class="navbar__nav my-1" class="nav_link" id="username">
+                                        <span></span> User
+                                </div>
+                            </div>
                     </nav>
                 </div>
                 <!--end container-->
@@ -259,30 +259,32 @@
                         <h2>Create Entry</h2>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="createEntry">
                             <div class="form-row">
                             <label for="name">Title</label>
-                            <input type="text" class="form-control" placeholder="Enrty title">
+                            <input type="text" class="form-control" id="title" placeholder="Entry title" required>
                             </div>
                             <div class="form-row">
                                 <label for="name">Note</label>
-                                <input type="text" class="form-control" placeholder="Description">
+                                <textarea type="text" class="form-control" id="note" placeholder="Description" required></textarea>
                             </div>
                             <div class="form-row">
-                                <label for="name">Date:</label>
-                                <input type="date" class="form-control" placeholder="Date">
+                                <label for="name">Image:</label>
+                                <input id="imageUrl" input= "image" type="file" accept="image/*">
+                            </div>
+                            <div class="modal-footer">
+                                    <button class="btn account__btn" type="submit"><i class="fa fa-plus"></i> Add</button>
                             </div>
                         </form>
                     </div><!--end modal body-->
-                    <div class="modal-footer">
-                    <button class="btn account__btn"><i class="fa fa-plus"></i> Add</button>
-                    </div>
+                    
                 </div>
             </div>
         </section>
     </div>
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/fetchentry.js"></script>
+    <script src="./assets/js/createEntry.js"></script>
 </body>
 
 </html>

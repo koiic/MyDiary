@@ -37,7 +37,7 @@ SELECT * FROM entries
 WHERE entries.user_id  = ${userId} 
 and entries.id = ${entryId} ;`;
 
-export const fetchEntries = userId => (`SELECT * FROM entries WHERE entries.user_id  = '${userId}'`);
+export const fetchEntries = userId => (`SELECT * FROM entries WHERE entries.user_id  = '${userId}' ORDER BY id DESC`);
 
 
 /**

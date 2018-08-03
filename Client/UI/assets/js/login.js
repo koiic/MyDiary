@@ -24,19 +24,18 @@ function login(e) {
     headers: header,
     body: JSON.stringify(requestBody),
   })
-    .then((response) => response.json())
+    .then(response => response.json())
     .then((result) => {
       if (result.status === 'success') {
         const usertoken = result.token;
         const name = result.username;
         localStorage.setItem('token', usertoken);
         localStorage.setItem('username', name);
-        window.location.replace('dashboard.html');
-      } else{
+        window.location.replace('content.html');
+      } else {
         alert(result.message);
       }
     });
 }
 
 document.getElementById('login').addEventListener('submit', login);
-
