@@ -37,7 +37,7 @@
                         </div>
                         <div class="navbar__nav nav__underline">
                             <a href="settings.html" class="nav__link">
-                                <span></span> Settings
+                                <span></span> Profile
                             </a>
                         </div>
 
@@ -49,14 +49,26 @@
                                         Create Entry <i class="fa fa-plus"></i>
                         </button></a>
                     </nav>
+                    
 
                     <nav class="nav__items nav__items-right">
                             <div class="navbar__nav">
                                 <div class="navbar__nav my-1" class="nav_link" id="username">
-                                        <span></span> User
+                                        <span></span> 
                                 </div>
                             </div>
                     </nav>
+
+                    <nav class="nav__items nav__items-right">
+                            <div class="navbar__nav nav__underline">
+                                    <button type="submit" class="btn account__btn"  onclick="logout()">
+                                        <span></span> LogOut
+                                    </button>
+                                </div>
+                    </nav>
+                    
+
+                    
                 </div>
                 <!--end container-->
             </div>
@@ -285,6 +297,7 @@
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/fetchentry.js"></script>
     <script src="./assets/js/createEntry.js"></script>
+    <script src="./assets/js/logout.js"></script>
 </body>
 
 </html>

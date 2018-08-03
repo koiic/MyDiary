@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 
 app.use(cors());
 // Base Routes
-app.get('/',express.static('client'));
+app.use('/', express.static('client'));
 app.use('/api/v1/auth', authenticationRoute);
 app.use('/api/v1/entries', entryRoute);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

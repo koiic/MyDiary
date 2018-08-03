@@ -6,7 +6,7 @@ function createEntry(e) {
   const note = document.getElementById('note').value;
   const imageUrl = document.getElementById('imageUrl').value;
   const token = localStorage.getItem('token');
-  const url = 'http://localhost:5000/api/v1/entries';
+  const url = '/api/v1/entries';
 
   const requestBody = {
     title, note, imageUrl,

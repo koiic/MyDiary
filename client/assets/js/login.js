@@ -13,7 +13,7 @@ function login(e) {
   };
 
   console.log(requestBody);
-  const url = 'http://localhost:5000/api/v1/auth/login';
+  const url = '/api/v1/auth/login';
 
   const header = {
     'Content-Type': 'application/json',
@@ -31,11 +31,12 @@ function login(e) {
         const name = result.username;
         localStorage.setItem('token', usertoken);
         localStorage.setItem('username', name);
-        window.location.replace('content.html');
+        window.location.replace('entries.html');
       } else {
         alert(result.message);
       }
     });
 }
+
 
 document.getElementById('login').addEventListener('submit', login);

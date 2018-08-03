@@ -36,7 +36,7 @@
                         </div>
                         <div class="navbar__nav nav__underline">
                             <a href="settings.html" class="nav__link">
-                                <span></span> Settings
+                                <span></span> Profile
                             </a>
                         </div>
 
@@ -44,12 +44,16 @@
                     <nav class="nav__items nav__items-right">
                             <div class="navbar__nav">
                                 <div class="navbar__nav my-1" class="nav_link" id="username">
-                                         <span></span> User
+                                         <span></span> 
                                 </div>
                             </div>
                     </nav>
                     <nav class="nav__items nav__items-right">
-
+                            <div class="navbar__nav nav__underline">
+                                    <button type="submit" class="btn account__btn"  onclick="logout()">
+                                        <span></span> LogOut
+                                    </button>
+                                </div>
                     </nav>
                 </div>
                 <!--end container-->
@@ -74,7 +78,7 @@
                                     voluptas ut veritatis voluptates cumque perspiciatis repellendus voluptatum optio dolorum.</p> 
                                 <p id="createdDate">Created date : 23-07-2018</p>
                                 <div class="text-right">
-                                    <button class="btn account__btn" id="edit" onclick="editTrue();">Edit</button>button class="btn account__btn" id="edit" onclick="editTrue();">Edit</button>
+                                    <button class="btn account__btn" id="edit" onclick="editTrue();">Edit</button>
                                     <button class="btn account__btn hide" id="update" onclick="updateEntry();">Update</button>
                                 </div>
         
@@ -107,6 +111,8 @@
     </div>
     <script src="./assets/js/toggle.js"></script>
     <script src="./assets/js/edit.js"></script>
+    <script src="./assets/js/logout.js"></script>
+
 </body>
 
 </html>

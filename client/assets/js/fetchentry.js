@@ -1,5 +1,5 @@
 
-const url = 'http://localhost:5000/api/v1/entries';
+const url = '/api/v1/entries';
 const token = localStorage.getItem('token');
 console.log('---->', fetch, token);
 fetch(url, {
@@ -32,7 +32,7 @@ fetch(url, {
                 </div>
             </div>
             <div>
-                <a href="edit.html"> <button class="btn account__btn"> Edit</button></a>
+                <a href="content.html?${element.id}"> <button class="btn account__btn"> View</button></a>
             </div>
             <div>
                 <button class="btn delete-btn" onclick="deleteTrue();">Delete </button>

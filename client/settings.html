@@ -37,19 +37,33 @@
                         </div>
                         <div class="navbar__nav nav__underline">
                             <a href="settings.html" class="nav__link active">
-                                <span></span> Settings
+                                <span></span> Profile
                             </a>
                         </div>
 
-                    </nav>
-                    <nav class="nav__items nav__items-right">
-                        <div class="navbar__nav">
+
+                        <!-- <nav class="nav__items nav__items-right">
+                                <div class="navbar__nav pr-0">
+                                    <div class="navbar__nav my-1" class="nav_link" id="username">
+                                            <span></span> 
+                                    </div>
+                                </div>
+                        </nav> -->
+
+                        <!-- <nav class="nav__items nav__items-right"></nav>
+                                <div class="navbar__nav nav__underline pr-0">
+                                        <button type="submit" class="btn account__btn"  onclick="logout()">
+                                            <span></span> LogOut
+                                        </button>
+                                    </div>
+                        </nav> -->
+                        <!-- <div class="navbar__nav">
                             <div class="navbar__nav">
 
                                 <button class="btn account__btn">Ismail</button>
 
                             </div>
-                        </div>
+                        </div> -->
                     </nav>
                     
                 </div>
@@ -70,18 +84,18 @@
 
                                 <div class="form-row">
                                         <label for="name">Firstname:</label>
-                                        <input type="text" class="form-control" placeholder="Ismail" required minlength="3" maxlength="30">
+                                        <input type="text" readonly class="form-control" placeholder="MyName" required minlength="3" maxlength="30" id="firstname">
                                     </div>
                                     <div class="form-row">
                                         <label for="name">Lastname:</label>
-                                        <input type="text" class="form-control" placeholder="Ibrahim" required minlength="3" maxlength="30">
+                                        <input type="text" class="form-control" readonly placeholder="MyLastName" required minlength="3" maxlength="30" id="lastname">
                                     </div>
                                     <div class="form-row">
                                         <label for="name"></label>Email:</label>
-                                        <input type="email" class="form-control" placeholder="fish@gmail.com" required minlength="3" maxlength="30">
+                                        <input type="email" class="form-control"  readonly placeholder="Email" required minlength="3" maxlength="30" id="email">
                                     </div>
 
-
+<!-- 
                                 <p>notification </p>
                                 <form>
                                     <div class="form-row">
@@ -93,7 +107,7 @@
                                     </div>
                                     <br>
                                     <br>
-                                    <a href="dashboard.html">
+                                    <a href="entries.html">
                                         <button type="button" class="btn account__btn btn-block">Update</button>
                                     </a>
 
@@ -101,7 +115,7 @@
                                     <div class="form-row"></div>
 
 
-                                </form>
+                                </form>  -->
 
 
                             </div>
@@ -137,7 +151,9 @@
         </div>
     </section>
     </div>
-    <script src="./assets/js/toggle.js"></script>
+    <script src="./assets/js/profile.js"></script>
+    <script src="./assets/js/logout.js"></script>
+
 </body>
 
 </html>
