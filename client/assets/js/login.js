@@ -6,6 +6,8 @@ function login(e) {
 
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
+  const resultMessage = document.getElementById('result');
+
 
 
   const requestBody = {
@@ -33,7 +35,7 @@ function login(e) {
         localStorage.setItem('username', name);
         window.location.replace('entries.html');
       } else {
-        alert(result.message);
+        resultMessage.innerHTML = result.message;
       }
     });
 }

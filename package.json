@@ -11,6 +11,7 @@
     "setup": "node  ./setup.js",
     "setup:test": "cross-env NODE_ENV=test babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
     "drop:test": "cross-env NODE_ENV=test babel-node --presets babel-preset-env ./server/migrations/dropTable.js",
+    "migrate-prod": " cross-env NODE_ENV=production babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
     "migrate": " babel-node --presets babel-preset-env ./server/migrations/setupTables.js",
     "drop": " babel-node --presets babel-preset-env ./server/migrations/dropTable.js"
   },
@@ -58,6 +59,7 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.2",
     "nyc": "^12.0.2",
+    "regenerator-runtime": "^0.12.1",
     "should": "^13.2.1",
     "volleyball": "^1.5.1"
   }

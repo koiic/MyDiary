@@ -6,15 +6,20 @@ import VerifyData from '../middlewares/VerifyData';
 // instantiate AuthRoute
 const entryRoute = Router();
 entryRoute.post('/', VerifyToken.tokenVerification, VerifyData.entryRequest, EntryController.addNewEntry);
+entryRoute.get('/count', VerifyToken.tokenVerification, EntryController.getAllEntryCount);
 entryRoute.get('/:entryId', VerifyToken.tokenVerification, EntryController.fetchSingleEntry);
 entryRoute.put('/:entryId', VerifyToken.tokenVerification, VerifyData.entryRequest, EntryController.updateEntries);
 entryRoute.get('/', VerifyToken.tokenVerification, EntryController.fetchUserEntries);
+// entryRoute.delete('/:entryId',VerifyToken.tokenVerification, EntryController.deleteEntry);
+entryRoute.put('/archive/:entryId',VerifyToken.tokenVerification, EntryController.archiveEntry);
+entryRoute.get('/today/count', VerifyToken.tokenVerification, EntryController.getTodayEntryCount);
+entryRoute.get('/archive/count', VerifyToken.tokenVerification, EntryController.getArchiveEntryCount)
+
+
+
 
 // entryRoute.get('/today', EntryController.getTodayEntries);
-// entryRoute.get('/count', EntryController.getAllEntryCount);
-// entryRoute.get('/today/count', EntryController.getTodayEntryCount);
 // entryRoute.get('/favourite', EntryController.getFavouriteEntry);
 // entryRoute.get('/favourite/count', EntryController.getFavouriteEntryCount);
-// entryRoute.delete('/:entryId', EntryController.deleteEntry);
 
 export default entryRoute;

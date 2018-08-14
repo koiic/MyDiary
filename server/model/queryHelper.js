@@ -39,7 +39,15 @@ SELECT * FROM entries
 WHERE entries.user_id  = ${userId} 
 and entries.id = ${entryId} ;`;
 
-export const fetchEntries = userId => (`SELECT * FROM entries WHERE entries.user_id  = '${userId}' ORDER BY id DESC`);
+export const fetchEntries = userId => (`
+SELECT * FROM 
+entries 
+WHERE 
+entries.user_id  = '${userId}' 
+AND
+is_archived = 'no'
+ORDER BY id DESC
+`);
 
 
 /**
@@ -67,10 +75,11 @@ where '${columnName} = '${value}`);
  * @name CreateAuthQuery
  * @description script to create user authentication
  */
-export const createAuth = (username, password, userId) => (`INSERT INTO auth("username", "password", "user_id")
-
-  VALUES('${username}', '${password}', '${userId}')
-  RETURNING *`);
+export const createAuth = (username, password, userId) => (`
+INSERT INTO 
+auth("username", "password", "user_id")
+VALUES('${username}', '${password}', '${userId}')
+RETURNING *`);
 
 
   /**
@@ -113,3 +122,48 @@ export const updateEntriesTable = (entryId, userId, request) => {
   }
   return updateQuery;
 };
+
+export const deleteSingleEntry = (entryId,userId) => `
+DELETE FROM entries 
+USING users 
+WHERE 
+entries.user_id = ${userId} 
+and entries.id = ${entryId}
+RETURNING *
+`;
+
+export const fetchEntriesCount = (userId) => (`
+SELECT COUNT(id) FROM entries 
+WHERE 
+entries.user_id = ${userId}
+
+`);
+
+export const todaysEntriesCount = (userId) => (`
+SELECT COUNT(id) FROM entries 
+WHERE 
+entries.user_id = ${userId}
+AND
+created_at::date = CURRENT_DATE 
+
+`);
+
+export const archiveSingleEntries = (entryId, userId) =>(`
+UPDATE entries 
+SET is_archived = 'yes'
+WHERE  entries.user_id = ${userId} 
+and entries.id = ${entryId} RETURNING *
+`)
+
+export const archiveEntryCount = (userId) => (`
+SELECT COUNT(id) FROM entries 
+WHERE 
+entries.user_id = ${userId}
+AND
+is_archived ='yes'
+
+`);
+
+
+// 'UPDATE entries SET is_archived == true WHERE  entries.user_id = ${userId} 
+// and entries.id = ${entryId}'

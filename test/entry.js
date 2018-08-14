@@ -5,25 +5,67 @@ import chaiHttp from 'chai-http';
 // import chaiThings from 'chai-things';
 import expect from 'expect';
 import app from '../index';
+import 'regenerator-runtime/runtime';
+
 
 chai.use(chaiHttp);
 // chai.use(chaiThings);
 // const { expect } = chai.expect;
 // const expect = chai.expect();
 const title = Math.random().toString(36).substring(2, 15);
-const token = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTUzMzEyODkwNSwiZXhwIjoxNTMzMjE1MzA1fQ.zqqT4gT66t6BTrvVRtOvC984_qvUKDHCYg-gjn9FTrw';
+let token;
+
+const signup = {
+  email: 'bro@gmail.com',
+  firstname: 'fish',
+  lastname: 'octopus',
+  username: 'sam',
+  password: 'secret',
+}
+
+// before(function(done) {
+//   chai.request(app)
+//     .post('/api/v1/auth/login')
+//     .send(signup)
+//     .end((err, response) => {
+//       response.should.have.status(200);
+//       response.body.should.be.a('object');
+//       this.token = response.body.token;
+//       console.log(this.token);
+//       done();
+//     });
+// });
 
 describe('DiaryEntries', () => {
+
+  let responseBody;
+  let user;
+  before('add user to db and log him in before test', async () => {
+    await chai.request(app).post('/api/v1/auth/signup').send(signup);
+    const login = await chai.request(app).post('/api/v1/auth/login')
+      .send({ username: signup.username, password: signup.password });
+      console.log(login);
+    user = login.body;
+    console.log(user);
+  });
+    // after('delete user after test', async () => {
+    //   after('remove user after test', async () => {
+    //     const response = await User.remove(user.username);
+    //     expect(response.rowCount).to.equal(1);
+    //     expect(response.rows[0]).to.include({ username: user.username });
+    //   });
+    // });
+ 
   describe('addEntry', () => {
     it('should add new entry if request is correct', (done) => {
       const newEntry = {
-        title: 'Thenewgame',
+        title ,
         note: 'my new entry',
         imageUrl: 'dfghjk.png',
       };
       chai.request(app)
         .post('/api/v1/entries/')
-        .set('Authorization', token)
+        .set('Authorization', `Bearer ${user.token}`)
         .send(newEntry)
         .end((err, response) => {
           expect(response.status).toBe(201);
@@ -40,7 +82,7 @@ describe('DiaryEntries', () => {
       };
       chai.request(app)
         .post('/api/v1/entries/')
-        .set('Authorization', token)
+        .set('Authorization', `Bearer ${user.token}`)
         .send(newEntry)
         .end((err, response) => {
           expect(response.status).toBe(400);
@@ -57,7 +99,7 @@ describe('DiaryEntries', () => {
       };
       chai.request(app)
         .post('/api/v1/entries/')
-        .set('Authorization', token)
+        .set('Authorization', `Bearer ${user.token}`)
         .send(newEntry)
         .end((err, response) => {
           expect(response.status).toBe(400);
@@ -67,14 +109,14 @@ describe('DiaryEntries', () => {
     });
     it('should not add new entry if title exist in database', (done) => {
       const newEntry = {
-        title: 'Thenewgame',
+        title: 'ymjwfa15i7',
         note: 'my new entry',
         imageUrl: 'calory.png',
         
       };
       chai.request(app)
         .post('/api/v1/entries/')
-        .set('Authorization', token)
+        .set('Authorization', `Bearer ${user.token}`)
         .send(newEntry)
         .end((err, response) => {
           expect(response.status).toBe(409);
@@ -91,7 +133,7 @@ describe('DiaryEntries', () => {
       };
       chai.request(app)
         .post('/api/v1/entries/')
-        .set('Authorization', token)
+        .set('Authorization', `Bearer ${user.token}`)
         .send(newEntry)
         .end((err, response) => {
           expect(response.status).toBe(400);
@@ -106,7 +148,7 @@ describe('DiaryEntries', () => {
       it('should fetch all entry', (done) => {
         chai.request(app)
           .get('/api/v1/entries/')
-          .set('Authorization', token)
+          .set('Authorization', `Bearer ${user.token}`)
           .end((err, response) => {
             expect(response.status).toBe(200);
             expect(response.body).toHaveProperty('message', 'fetch entries successfully');
@@ -129,7 +171,7 @@ describe('DiaryEntries', () => {
         chai.request(app)
           .put(`/api/v1/entries/${id}`)
           .send(updateRequest)
-          .set('Authorization', token)
+          .set('Authorization', `Bearer ${user.token}`)
           .end((err, response) => {
             expect(response.status).toBe(400);
             expect(response.body).toHaveProperty('message', 'Id must be a number');
@@ -148,7 +190,7 @@ describe('DiaryEntries', () => {
         chai.request(app)
           .put(`/api/v1/entries/${id}`)
           .send(updateRequest)
-          .set('Authorization', token)
+          .set('Authorization', `Bearer ${user.token}`)
           .end((err, response) => {
             expect(response.status).toBe(400);
             expect(response.body).toHaveProperty('status', 'failed');
@@ -157,20 +199,20 @@ describe('DiaryEntries', () => {
           });
       });
       it('should update if request are correct', (done) => {
-        const id = 2;
+        const id = 3;
         const updateRequest = {
 
-          title: 'Thenewgame',
+          title: 'fish',
           note: ' lorem ipsum calculs',
           imageUrl: 'calory.jpg',
         };
         chai.request(app)
           .put(`/api/v1/entries/${id}`)
           .send(updateRequest)
-          .set('Authorization', token)
+          .set('Authorization', `Bearer ${user.token}`)
           .end((err, response) => {
             expect(response.status).toBe(200);
-            // expect(response.body).toHaveProperty('status', 'success');
+            expect(response.body).toHaveProperty('status', 'success');
             expect(response.body).toHaveProperty('message', `An entry with ${id} has been updated successfully`);
             done();
           });
@@ -183,7 +225,7 @@ describe('DiaryEntries', () => {
         const id = 'ola';
         chai.request(app)
           .get(`/api/v1/entries/${id}`)
-          .set('Authorization', token)
+          .set('Authorization', `Bearer ${user.token}`)
           .end((err, response) => {
             expect(response.status).toBe(400);
             expect(response.body).toHaveProperty('message', 'Id must be a number');
@@ -191,10 +233,10 @@ describe('DiaryEntries', () => {
           });
       });
       it('should fetch entry if id exist', (done) => {
-        const id = 1;
+        const id = 4;
         chai.request(app)
           .get(`/api/v1/entries/${id}`)
-          .set('Authorization', token)
+          .set('Authorization', `Bearer ${user.token}`)
           .end((err, response) => {
             expect(response.status).toBe(200);
             expect(response.body).toHaveProperty('message', `Entry for id : ${id} fetched successfully`);
@@ -205,7 +247,7 @@ describe('DiaryEntries', () => {
         const id = 1000;
         chai.request(app)
           .get(`/api/v1/entries/${id}`)
-          .set('Authorization', token)
+          .set('Authorization', `Bearer ${user.token}`)
           .end((err, response) => {
             expect(response.status).toBe(404);
             expect(response.body).toHaveProperty('message', `Entry not found for id : ${id}`);
@@ -220,16 +262,18 @@ describe('DiaryEntries', () => {
   //       const id = 'fish';
   //       chai.request(app)
   //         .delete(`/api/v1/entries/${id}`)
+  //         .set('Authorization', `Bearer ${user.token}`)
   //         .end((err, response) => {
   //           expect(response.status).toBe(400);
-  //           expect(response.body).toHaveProperty('message', 'id must be a number');
+  //           expect(response.body).toHaveProperty('message', 'Id must be a number');
   //           done();
   //         });
   //     });
   //     it('should  delete entry if id is valid', (done) => {
-  //       const id = 2;
+  //       const id = 8;
   //       chai.request(app)
   //         .delete(`/api/v1/entries/${id}`)
+  //         .set('Authorization', `Bearer ${user.token}`)
   //         .end((err, response) => {
   //           expect(response.status).toBe(200);
   //           expect(response.body).toHaveProperty('message', `An entry with ${id} has been deleted successfully`);
@@ -298,40 +342,42 @@ describe('DiaryEntries', () => {
   //   // });
   //   });
   // });
-  // describe('fetchTodayEntryCount', () => {
-  //   describe('fetch all Today entry count', () => {
-  //     it('should return today entry count', (done) => {
-  //       chai.request(app)
-  //         .get('/api/v1/entries/today/count')
-  //         .end((err, response) => {
-  //           expect(response.status).toBe(200);
-  //           expect(response.body).toHaveProperty('message', 'Todays Entry count fetched successfully');
-  //           done();
-  //         });
-  //     });
+  describe('fetchTodayEntryCount', () => {
+    describe('fetch all Today entry count', () => {
+      it('should return today entry count', (done) => {
+        chai.request(app)
+          .get('/api/v1/entries/today/count')
+          .set('Authorization', `Bearer ${user.token}`)
+          .end((err, response) => {
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty('message', 'fetch today entry count successfully');
+            done();
+          });
+      });
 
-  //     // it('should return 0 if no favourite entry', (done) => {
-  //     //   chai.request(app)
-  //     //     .get('/api/v1/entries/today/count')
-  //     //     .end((err, response) => {
-  //     //       expect(response.status).toBe(404);
-  //     //       expect(response.body).toHaveProperty('message', 'No entry found for today');
-  //     //       done();
-  //     //     });
-  //     // });
-  //   });
-  // });
-  // describe('fetchEntryCount', () => {
-  //   describe('fetch all  entry volume', () => {
-  //     it('should return  entry count', (done) => {
-  //       chai.request(app)
-  //         .get('/api/v1/entries/count')
-  //         .end((err, response) => {
-  //           expect(response.status).toBe(200);
-  //           expect(response.body).toHaveProperty('message', 'Entry volume successfully fetched');
-  //           done();
-  //         });
-  //     });
-  //   });
-  // });
+      // it('should return 0 if no favourite entry', (done) => {
+      //   chai.request(app)
+      //     .get('/api/v1/entries/today/count')
+      //     .end((err, response) => {
+      //       expect(response.status).toBe(404);
+      //       expect(response.body).toHaveProperty('message', 'No entry found for today');
+      //       done();
+      //     });
+      // });
+    });
+  });
+  describe('fetchEntryCount', () => {
+    describe('fetch all  entry volume', () => {
+      it('should return  entry count', (done) => {
+        chai.request(app)
+          .get('/api/v1/entries/count')
+          .set('Authorization', `Bearer ${user.token}`)
+          .end((err, response) => {
+            expect(response.status).toBe(200);
+            expect(response.body).toHaveProperty('message', 'Entry Count for user fetched successfully');
+            done();
+          });
+      });
+    });
+  });
 });
