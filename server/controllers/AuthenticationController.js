@@ -16,6 +16,11 @@ class AuthenticationController {
      *
      */
   static createAccount(request, response) {
+
+    const validEmail = Validation.isEmail(request.body.email);
+    if (!validEmail) {
+      return response.status(400).json({ message: 'Invalid Email' });
+    }
     const validPassword = Validation.isPassword(request.body.password);
     if (!validPassword) {
       return response.status(400).json({ message: 'Password should not be lesser than 4' });
@@ -57,7 +62,7 @@ class AuthenticationController {
                     return response.status(201).json({
                       status: 'success',
                       message: 'User Creation Successfully',
-                      user: authResult.rows,
+                      user: authResult.rows[0].username,
                       data: token,
                     });
                   });

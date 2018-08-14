@@ -8,6 +8,7 @@ function createAccount(e) {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
   const email = document.getElementById('email').value;
+  const resultMessage = document.getElementById('result');
 
   const requestBody = {
     firstname, lastname, username, email, password,
@@ -30,21 +31,18 @@ function createAccount(e) {
   //       return response.json();
     // })
     .then((res) => {
-      // console.log('-->-->', result.json());
-      res.json().then(result=> {
+      res.json().then((result) => {
         console.log('work', result);
-        if(result.status === 'success') {
-       
-          const token  = result.data;
+        if (result.status === 'success') {
+          const token = result.data;
           console.log('tke', token);
           localStorage.setItem('token', token);
           window.location.replace('entries.html');
-        }else{
-          swal('failed', result.message, 'error');
+        }else {
+          resultMessage.innerHTML = result.message;
         }
       });
-    })
-    
+    });
 }
 
 document.getElementById('createAccount').addEventListener('submit', createAccount);

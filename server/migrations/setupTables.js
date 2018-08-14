@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS entries(
     title VARCHAR(255)  NOT NULL, 
     note VARCHAR(255) NOT NULL, 
     image_url VARCHAR(255) DEFAULT NULL,
+    is_archived boolean DEFAULT false,
     created_at TIMESTAMP Default Now(),
     updated_at TIMESTAMP Default Now(),
     user_id int, 

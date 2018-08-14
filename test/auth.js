@@ -11,7 +11,7 @@ describe('Authentication', () => {
   describe('registration', () => {
     it('should signup if fields are valid', (done) => {
       const signup = {
-        email: 'calory@gmail.com',
+        email: `${email}@gmail.com`,
         firstname: 'fish',
         lastname: 'octopus',
         username,
@@ -102,7 +102,7 @@ describe('Authentication', () => {
         email: 'fishbababa',
         firstname: 'fish',
         lastname: 'octopus',
-        username: 'bob',
+        username: 'sully',
         password: 'secret',
       };
       chai.request(app)
@@ -110,7 +110,7 @@ describe('Authentication', () => {
         .send(signup)
         .end((err, response) => {
           response.should.have.status(400);
-          response.body.should.have.a.property('message').to.equal('Invalid email');
+          response.body.should.have.a.property('message').to.equal('Invalid Email');
           done();
         });
     });
@@ -156,7 +156,7 @@ describe('Authentication', () => {
   describe('login', () => {
     it('should login a registered user', (done) => {
       const login = {
-        username: 'p3ri3irgv7',
+        username: 'sam',
         password: 'secret',
       };
       chai.request(app)

@@ -42,7 +42,7 @@ document.onreadystatechange = function () {
       })
       .catch((err) => {
         console.log(err);
-        alert('Internal server error');
+        alert('Entry not found');
       });
   }
 };
