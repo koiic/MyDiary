@@ -1,4 +1,4 @@
-hrimport pg from 'pg';
+import pg from 'pg';
 import config from '../config/config';
 
 const db = (process.env.NODE_ENV === 'test') ? new pg.Pool(config.test) 
