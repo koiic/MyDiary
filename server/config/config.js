@@ -21,7 +21,11 @@ const config = {
   },
 
   production: {
-    db_url: process.env.PRODUCTION_DB_URL,
+    user: process.env.DB_USER=calory,
+    host: process.env.DB_HOST=localhost,
+    database: process.env.DB_NAME=diarry,
+    password: process.env.DB_PASSWORD=calory20,
+    port: process.env.DB_PORT=5432  
   },
   jwtSecret: process.env.JWT_SECRET,
 
