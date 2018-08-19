@@ -40,7 +40,7 @@ class EntryController {
             return response.status(201).json({
               message: 'A new Entry added sucessfully',
               status: 'successful',
-              data: queryResult.row,
+              data: queryResult.rows,
             });
           });
       })
