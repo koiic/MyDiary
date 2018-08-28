@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS  users(
     email VARCHAR(255) UNIQUE NOT NULL, 
     firstname VARCHAR(255), 
     lastname VARCHAR(255),
+    subcribe_reminder BOOLEAN Default false,
     created_at TIMESTAMP Default Now(),
     updated_at TIMESTAMP Default Now()
 )`;

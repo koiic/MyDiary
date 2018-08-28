@@ -164,6 +164,12 @@ is_archived ='yes'
 
 `);
 
+export const fetchSubscribedUser = () => (`
+SELECT * FROM users
+WHERE 
+subcribe_reminder = 'yes';
+`);
+
 
 // 'UPDATE entries SET is_archived == true WHERE  entries.user_id = ${userId} 
 // and entries.id = ${entryId}'
